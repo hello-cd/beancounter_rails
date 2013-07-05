@@ -76,12 +76,12 @@ function hideModal(id){
   <% if current_user.provider?(:twitter)%>
     <a style="margin-left: 82;" href="https://twitter.com/intent/tweet?text=Sto%20analizzando%20il%20mio%20profilo%20su%20http://profilerix.com"><%=image_tag "twitter_share.png", :class => "share_image"%></a>
   <% else %>
-    <a href="http://194.116.82.81:8080/beancounter-platform/rest/user/oauth/token/twitter/<%=current_user.username%>?redirect=<%=REDIRECT_PATH%>/users" role="button"><%=image_tag "twitter_share.png", :class => "share_image"%></a>
+    <a href="http://#{BC_PLATFORM_URL}:#{BC_PLATFORM_PORT}/beancounter-platform/rest/user/oauth/token/twitter/<%=current_user.username%>?redirect=<%=REDIRECT_PATH%>/users" role="button"><%=image_tag "twitter_share.png", :class => "share_image"%></a>
   <% end %>
   <% if current_user.provider?(:facebook)%>
     <a href="#" role="button" onclick="showModal('facebook_modal')"><%=image_tag "facebook_share.png", :class => "share_image"%></a>
   <% else %>
-    <a href="http://194.116.82.81:8080/beancounter-platform/rest/user/oauth/token/facebook/<%=current_user.username%>?redirect=<%=REDIRECT_PATH%>/users" role="button"><%=image_tag "facebook_share.png", :class => "share_image"%></a>
+    <a href="http://#{BC_PLATFORM_URL}:#{BC_PLATFORM_PORT}/beancounter-platform/rest/user/oauth/token/facebook/<%=current_user.username%>?redirect=<%=REDIRECT_PATH%>/users" role="button"><%=image_tag "facebook_share.png", :class => "share_image"%></a>
   <% end %></h1>
 </div>
 
