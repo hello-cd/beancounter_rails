@@ -8,7 +8,7 @@ gem 'rails', '3.2.6'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'rest-client', :git => 'git://github.com/archiloque/rest-client.git'
+gem 'rest-client', :git => 'git://github.com/rest-client/rest-client.git'
 gem 'sqlite3'
 
 # Gems used only for assets and not required
