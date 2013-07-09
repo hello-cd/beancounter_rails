@@ -36,6 +36,6 @@ Beancounter::Application.configure do
   config.assets.debug = true
 
   REDIRECT_PATH = "http://localhost:3000"
-  BC_PLATFORM_HOST = "http://localhost"
+  BC_PLATFORM_HOST = "localhost"
   BC_PLATFORM_PORT = "8080"
 end

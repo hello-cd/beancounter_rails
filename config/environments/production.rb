@@ -68,6 +68,6 @@ Beancounter::Application.configure do
 
   #REDIRECT_PATH = "http://profilerix.com"
   REDIRECT_PATH = "http://192.168.10.10"
-  BC_PLATFORM_HOST = "http://192.168.10.10"
+  BC_PLATFORM_HOST = "192.168.10.10"
   BC_PLATFORM_PORT = "8080"
 end
