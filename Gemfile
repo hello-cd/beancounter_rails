@@ -1,8 +1,5 @@
-#TODO Valutare le gemme da buttare via (sono moltissime)
-
 source 'https://rubygems.org'
 
-ruby "1.9.3"
 gem 'rails', '3.2.6'
 
 # Bundle edge Rails instead:
@@ -16,7 +13,7 @@ gem 'sqlite3'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  
+
   gem 'twitter-bootstrap-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -32,16 +29,9 @@ group :test do
   gem 'debugger'
   gem 'factory_girl_rails'
   gem 'capybara'
-  gem 'guard-rspec'
   gem 'vcr'
   gem 'fakeweb'
 end
-
-gem 'omniauth-twitter'
-gem 'twitter'
-
-gem 'omniauth-facebook'
-gem 'koala'
 
 group :development do
   gem 'capistrano'
