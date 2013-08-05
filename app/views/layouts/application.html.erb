@@ -12,7 +12,7 @@
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container" style="width: 1580px;">
- 
+
         <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
           <span class="icon-bar"></span>
@@ -24,7 +24,7 @@
         <%else%>
           <a style="margin-left:2px;" class="brand" href="/users?token=<%=current_user.token%>&username=<%=current_user.username%>">Beancounter</a>
         <%end%>
- 
+
         <!-- Everything you want hidden at 940px or less, place within here -->
         <div class="nav-collapse">
         </div>
@@ -43,13 +43,13 @@
               <li style="margin-top:10px;"> Signed in as <%= current_user.name %> </li>
               <li><%= link_to "Sign out", sign_out_path, id: "sign_out" %></li>
             <% else %>
-              <li><%= link_to "Sign in with facebook", "http://194.116.82.81:8080/beancounter-platform/rest/user/register/facebook/web?redirect=#{REDIRECT_PATH}/auth" %></li>
-              <li><%= link_to "Sign in with twitter", "http://194.116.82.81:8080/beancounter-platform/rest/user/register/twitter/web?redirect=#{REDIRECT_PATH}/auth" %></li>
+              <li><%= link_to "Sign in with facebook", "#{BEANCOUNTER_HOST}/beancounter-platform/rest/user/register/facebook/web?redirect=#{REDIRECT_PATH}/auth" %></li>
+              <li><%= link_to "Sign in with twitter", "#{BEANCOUNTER_HOST}/beancounter-platform/rest/user/register/twitter/web?redirect=#{REDIRECT_PATH}/auth" %></li>
             <% end %>
           </ul>
           </ul>
         </div>
- 
+
       </div>
     </div>
   </div>

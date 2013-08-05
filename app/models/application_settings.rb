@@ -5,11 +5,11 @@ class ApplicationSettings < ActiveRecord::Base
   require "net/http"
 
   def self.generate_beancounter_api_key
-    RestClient.post('http://194.116.82.81:8080/beancounter-platform/rest/application/register',{
+    RestClient.post('#{BEANCOUNTER_HOST}/beancounter-platform/rest/application/register',{
       :name => 'beancounter_demo',
       :description => 'beancounter demo application',
       :email => 'test@test.io',
-      :oauthCallback => 'http://localhost:3000' 
+      :oauthCallback => 'http://localhost:3000'
     }) do | req, res, result|
       if result.code == "200"
         api_key = JSON.parse(req.body)["object"]
@@ -28,13 +28,13 @@ class ApplicationSettings < ActiveRecord::Base
   end
 
   def self.check_status
-    RestClient.get("http://194.116.82.81:8080/beancounter-platform/rest/api/check") do |req, res, result|
+    RestClient.get("#{BEANCOUNTER_HOST}/beancounter-platform/rest/api/check") do |req, res, result|
       result.code == "200" && JSON.parse(req.body)["status"] == "OK"
     end
   end
 
   def self.version
-    RestClient.get("http://194.116.82.81:8080/beancounter-platform/rest/api/version") do |req, res, result|
+    RestClient.get("#{BEANCOUNTER_HOST}/beancounter-platform/rest/api/version") do |req, res, result|
       if result.code == "200" && JSON.parse(req.body)["status"] == "OK"
         JSON.parse(req.body)["object"]
       end

@@ -67,4 +67,5 @@ Beancounter::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   REDIRECT_PATH = "http://profilerix.com"
+  BEANCOUNTER_HOST= "http://194.116.82.81:8080"
 end
