@@ -10,4 +10,81 @@
  *
  *= require_self
  *= require_tree .
+*/
+
+    html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+
+    * { box-sizing: border-box; }
+
+    body {
+
+      padding-bottom: 60px;
+
+      background: #f0f0f0; color: #484848;
+
+      font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif; }
+
+    /* pagination */
+
+    section { padding: 110px 10% 0 10%; position: relative; }
+
+    section > header, section > nav {
+
+      position: absolute; top: 0; left: 0; width: 100%;
+
+      display: block; background: #1abb9c; padding: 20px;  }
+
+    section > header h1 { line-height: 30px; font-size: 30px; padding: 0 0 0 100px; color: white; }
+
+    section > header:after {
+
+      position: absolute; bottom: -30px; left: 130px;
+
+      content: ''; display: block; width: 0px; border: 15px solid transparent; border-top: 15px solid #1abb9c; }
+
+    nav ul { display: block; text-align: right; }
+
+    nav li { display: inline-block; padding-right: 30px; }
+
+    nav li:after { border-right: 1px solid #eee; }
+
+    nav a, nav a:hover { line-height: 30px; font-size: 20px; color: #eee; text-decoration: none; }
+
+    section > h1 { font-size: 44px; padding: 5px 0 20px; }
+
+    section > h2 { font-size: 22px; padding: 5px 0 20px; }
+
+    /* demo-frame */
+
+    .social { margin: 100px auto; padding: 0 10%; text-align: center }
+
+    .social li { display: inline-block; width: 49%; margin-right: 1%; text-align: left; border-radius: 5px; cursor:pointer; background: red; }
+
+    .social li:last-child { margin-right: 0; }
+
+    .social a, .social a:hover {
+
+      line-height: 55px; vertical-align: top; display: inline-block; width: 100%;
+
+      text-shadow: 2px 0 3px rgba(0,0,0,0.1); font-size: 32px; padding: 20px; color: white; text-decoration: none; border-bottom: 3px solid rgba(0,0,0,0.15); }
+
+    .social a:before {
+
+      display: inline-block; vertical-align: top; margin-right: 65px; width: 40px; padding: 11px 44px 0 18px;
+
+      font-family: FontAwesome; border-right: 2px solid rgba(255, 255, 255, 0.15); text-shadow: 0px 2px 3px #f0f0f0;
+
+      line-height: 44px; font-size: 54px; color: white; text-decoration: none; text-align: center; }
+
+    .social a.fb:before { content: '\f09a'; }
+
+    .social a.tw:before { content: '\f099'; }
+
+    .social li.fb { background: #4470cf; }
+
+    .social li.fb:hover { background: #5E8AE9; }
+
+    .social li.tw { background: #5daed5; }
+
+    .social li.tw:hover { background: #77C8EF; }
  */

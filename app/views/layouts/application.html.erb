@@ -2,65 +2,47 @@
 <html>
 <head>
   <title>Beancounter</title>
-  <link rel="stylesheet" href="https://s-passets-ec.pinimg.com/css/pinboard_f9df583e.css" type="text/css" media="all"/>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag 'application', 'highcharts','tagcanvas.min', 'bootstrap' %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container" style="width: 1580px;">
-
-        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <% if current_user==nil %>
-          <a style="margin-left:2px;" class="brand" href="/">Beancounter</a>
-        <%else%>
-          <a style="margin-left:2px;" class="brand" href="/users?token=<%=current_user.token%>&username=<%=current_user.username%>">Beancounter</a>
-        <%end%>
-
-        <!-- Everything you want hidden at 940px or less, place within here -->
-        <div class="nav-collapse">
-        </div>
-
-        <div class="nav-collapse">
-          <% if ApplicationSettings.check_status %>
-            <div class="progress progress-success" style="margin-right:160px;width:200px;float:right;">
-            <div class="bar" style="width: 100%;">API Online <%=ApplicationSettings.version%></div>
-          <% else %>
-            <div class="progress progress-danger" style="margin-right:160px;width:200px;float:right;">
-            <div class="bar" style="width: 100%;">API Offline</div>
+  <!--a style="margin-left:2px;" class="brand" href="/users?token=<%#=current_user.token%>&username=<%#=current_user.username%>">Beancounter</a-->
+  <section>
+    <nav>
+      <ul class="top-navigation">
+        <li><a>
+          <% if current_user  %>
+            Signed in as <%= current_user.name %> <%= link_to "Sign out", sign_out_path, id: "sign_out" %>
           <% end %>
-            </div>
-            <ul class="nav">
-            <% if current_user  %>
-              <li style="margin-top:10px;"> Signed in as <%= current_user.name %> </li>
-              <li><%= link_to "Sign out", sign_out_path, id: "sign_out" %></li>
-            <% else %>
-              <li><%= link_to "Sign in with facebook", "http://#{BC_PLATFORM_HOST}:#{BC_PLATFORM_PORT}/beancounter-platform/rest/user/register/facebook/web?redirect=#{REDIRECT_PATH}/auth" %></li>
-              <li><%= link_to "Sign in with twitter", "http://#{BC_PLATFORM_HOST}:#{BC_PLATFORM_PORT}/beancounter-platform/rest/user/register/twitter/web?redirect=#{REDIRECT_PATH}/auth" %></li>
-            <% end %>
-          </ul>
-          </ul>
-        </div>
+        </a></li>
+        <li><a>
+          <% if false #ApplicationSettings.check_status %>
+            API ONLINE <%=ApplicationSettings.version%>
+          <% else %>
+            API OFFLINE
+          <% end %>
+        </a></li>
+      </ul>
+    </nav>
 
-      </div>
+    <%= render 'layouts/messages' %>
+    <div id="xxx">
+      <%= yield %>
     </div>
-  </div>
-  <div id="container-fluid">
-    <div class="row clearfix row-fluid">
-      <div class="span15 clearfix" style="margin-left:40px">
-        <%= render 'layouts/messages' %>
-        <div class="span15 clearfix"><%= yield %></div>
-      </div>
-    </div>
-  </div>
+  </section>
+
+  <section>
+    <header>
+      <h1>Section</h1>
+    </header>
+
+    <h2>Lorem ipsum dolor sit amet...</h2>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, sapiente, soluta asperiores aut ullam accusantium ea cumque expedita architecto eligendi quas delectus tempore amet placeat beatae minus doloremque ducimus optio. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, delectus, odio harum laborum deleniti nisi ab. Neque, accusantium, hic, necessitatibus, eos consectetur aut sed voluptatibus tenetur est perferendis quisquam mollitia.</p>
+
+  </section>
 
 </body>
 </html>
