@@ -12,21 +12,24 @@
   <section>
     <nav>
       <ul class="top-navigation">
-        <li><a>
-          <% if current_user  %>
-            Signed in as <%= current_user.name %> <%= link_to "Sign out", sign_out_path, id: "sign_out" %>
-          <% end %>
-        </a></li>
-        <li><a>
-          <% if false #ApplicationSettings.check_status %>
-            API ONLINE <%=ApplicationSettings.version%>
-          <% else %>
-            API OFFLINE
-          <% end %>
-        </a></li>
+        <li>
+          <a>
+            <% if current_user  %>
+              Signed in as <%= current_user.name %> <%= link_to "Sign out", sign_out_path, id: "sign_out" %>
+            <% end %>
+          </a>
+        </li>
+        <li>
+          <a>
+            <% if false #ApplicationSettings.check_status %>
+              <span style="background: rgba(68, 255, 143, 1); padding: 8px 10px; border-radius: 4px; color: white;">API ONLINE <%=ApplicationSettings.version%></span>
+            <% else %>
+              <span style="background: rgba(255, 68, 68, 1); padding: 8px 10px; border-radius: 4px; color: white;">API OFFLINE</span>
+            <% end %>
+          </a>
+        </li>
       </ul>
     </nav>
-
     <%= render 'layouts/messages' %>
     <div id="xxx">
       <%= yield %>

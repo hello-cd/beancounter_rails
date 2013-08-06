@@ -71,23 +71,133 @@ function hideModal(id){
   </div>
 </div>
 <!-- end modal -->
-
-<div class="span15 clearfix" style="margin-bottom:30px;"><h1 class="insertType" style="margin-bottom:10px; font-size:40px;">Hi <%= current_user.name %>!
-  <% if current_user.provider?(:twitter)%>
+<h1>
+  Hi {username}<%#= current_user.name %>!
+  <% if true# current_user.provider?(:twitter)%>
     <a style="margin-left: 82;" href="https://twitter.com/intent/tweet?text=Sto%20analizzando%20il%20mio%20profilo%20su%20http://profilerix.com"><%=image_tag "twitter_share.png", :class => "share_image"%></a>
   <% else %>
     <a href="http://#{BC_PLATFORM_HOST}:#{BC_PLATFORM_PORT}/beancounter-platform/rest/user/oauth/token/twitter/<%=current_user.username%>?redirect=<%=REDIRECT_PATH%>/users" role="button"><%=image_tag "twitter_share.png", :class => "share_image"%></a>
   <% end %>
-  <% if current_user.provider?(:facebook)%>
+  <% if true#current_user.provider?(:facebook)%>
     <a href="#" role="button" onclick="showModal('facebook_modal')"><%=image_tag "facebook_share.png", :class => "share_image"%></a>
   <% else %>
     <a href="http://#{BC_PLATFORM_HOST}:#{BC_PLATFORM_PORT}/beancounter-platform/rest/user/oauth/token/facebook/<%=current_user.username%>?redirect=<%=REDIRECT_PATH%>/users" role="button"><%=image_tag "facebook_share.png", :class => "share_image"%></a>
-  <% end %></h1>
+  <% end %>
+</h1>
+
+<h3>your interests, at a glance...</h3>
+
+<style>
+
+  .nav-tabs { border-bottom: 5px solid #1abb9c; }
+
+  .nav-tabs li { padding: 0 !important;  }
+
+  .nav-tabs li a {
+
+    color: #1abb9c; background: #f0f0f0; border: none !important;
+
+    border-radius: 0; line-height: 35px; font-size: 18px; padding: 5px 10px; height: 45px; margin: 0  0 5px 5px; cursor: pointer !important; }
+
+  .nav-tabs .active a, .nav-tabs .active a:hover, .nav-tabs a:hover { color: #fff !important; background: #1abb9c !important; }
+
+</style>
+
+
+
+<div>
+  <ul class="nav nav-tabs" id="activityTab">
+   <li class="active pull-right">
+     <a href="#interests" data-toggle="tab">Interests</a>
+   </li>
+   <li class="pull-right">
+     <a href="#categories" data-toggle="tab">Categories</a>
+   </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="interests">
+      <!--<div id="customers_table" class="span5 clearfix">-->
+      <div id="customers_table" class="span15 clearfix">
+        <% if !@interests.empty? %>
+          <table class="table table-striped table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>Interest</th>
+                <th>Weight</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <%@interests.reverse.each_with_index do |interest, i|%>
+                <tr id="<%=i+1%>">
+                  <td><%=interest["label"]%></td>
+                  <td><%=interest["weight"]*100%></td>
+                  <!--<td>
+                    <a href="#" class="popclass btn btn-primary" rel="popover"
+                      data-content='
+                      <div class="span8 clearfix">
+                        <iframe src="http://api.jquery.com/" width="100%" height="600" id="frameDemo"></iframe>
+                        <script>
+                          $("#frameDemo").contents().find("a").css("background-color","#BADA55");
+                        </script>
+                      </div>'
+                      data-original-title="<%#=interest['label']%><button style='float:right;' type='button' class='btn btn-inverse'>Black List</button>">
+                      Detail
+                    </a>
+                  </td>-->
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          Sorry we're still computing your profile, good things take time
+        <% end %>
+      </div>
+    </div>
+    <div class="tab-pane" id="categories">
+      <!--<div class="span5 clearfix">-->
+      <div class="span15 clearfix">
+        <% if !@categories.empty? %>
+          <table class="table table-striped table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Weight</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <%@categories.reverse.each_with_index do |category, i|%>
+                <tr id="<%=i+1%>">
+                  <td><%=category["label"]%></td>
+                  <td><%=category["weight"]*100%></td>
+                  <!--<td>
+                    <a href="#" class="popclass btn btn-primary" rel="popover" data-content='
+                      <div class="span5 clearfix">
+                        <iframe src="http://api.jquery.com/" width="100%" height="600" id="frameDemo"></iframe>
+                        <script>
+                          $("#frameDemo").contents().find("a").css("background-color","#BADA55");
+                        </script>
+                      </div>'
+                      data-original-title="<%#=category['label']%><button style='float:right;' type='button' class='btn btn-inverse'>Black List</button>">
+                      Detail
+                    </a>
+                  </td>-->
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          Sorry we're still computing your profile, good things take time
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="span15 clearfix" style="margin-bottom:10px;"><h3 class="insertType" style="font-size:30px;">your interests, at a glance...</h3></div>
-
-<div class="span15 clearfix" style="margin-bottom:30px" id="myCanvasContainer">
+<div style="margin: 30px 0; background: red" id="myCanvasContainer">
+  <!-- TODO : grab with from container -->
   <canvas width="1300" height="300" id="myCanvas">
     <p>Anything in here will be replaced on browsers that support the canvas element</p>
     <ul>
@@ -103,95 +213,4 @@ function hideModal(id){
       <% end %>
     </ul>
   </canvas>
-</div>
-
-<div class="span10 cleafix">
-<ul class="nav nav-tabs" id="activityTab">
- <li class="active">
-   <a href="#interests" data-toggle="tab">Interests</a>
- </li>
- <li>
-   <a href="#categories" data-toggle="tab">Categories</a>
- </li>
-</ul>
-
-<div class="tab-content">
-  <div class="tab-pane active" id="interests">
-    <!--<div id="customers_table" class="span5 clearfix">-->
-    <div id="customers_table" class="span15 clearfix">
-      <% if !@interests.empty? %>
-        <table class="table table-striped table-bordered table-condensed">
-          <thead>
-            <tr>
-              <th>Interest</th>
-              <th>Weight</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <%@interests.reverse.each_with_index do |interest, i|%>
-              <tr id="<%=i+1%>">
-                <td><%=interest["label"]%></td>
-                <td><%=interest["weight"]*100%></td>
-                <!--<td>
-                  <a href="#" class="popclass btn btn-primary" rel="popover"
-                    data-content='
-                    <div class="span8 clearfix">
-                      <iframe src="http://api.jquery.com/" width="100%" height="600" id="frameDemo"></iframe>
-                      <script>
-                        $("#frameDemo").contents().find("a").css("background-color","#BADA55");
-                      </script>
-                    </div>'
-                    data-original-title="<%#=interest['label']%><button style='float:right;' type='button' class='btn btn-inverse'>Black List</button>">
-                    Detail
-                  </a>
-                </td>-->
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% else %>
-        Sorry we're still computing your profile, good things take time
-      <% end %>
-    </div>
-  </div>
-  <div class="tab-pane" id="categories">
-    <!--<div class="span5 clearfix">-->
-    <div class="span15 clearfix">
-      <% if !@categories.empty? %>
-        <table class="table table-striped table-bordered table-condensed">
-          <thead>
-            <tr>
-              <th>Category</th>
-              <th>Weight</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <%@categories.reverse.each_with_index do |category, i|%>
-              <tr id="<%=i+1%>">
-                <td><%=category["label"]%></td>
-                <td><%=category["weight"]*100%></td>
-                <!--<td>
-                  <a href="#" class="popclass btn btn-primary" rel="popover" data-content='
-                    <div class="span5 clearfix">
-                      <iframe src="http://api.jquery.com/" width="100%" height="600" id="frameDemo"></iframe>
-                      <script>
-                        $("#frameDemo").contents().find("a").css("background-color","#BADA55");
-                      </script>
-                    </div>'
-                    data-original-title="<%#=category['label']%><button style='float:right;' type='button' class='btn btn-inverse'>Black List</button>">
-                    Detail
-                  </a>
-                </td>-->
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% else %>
-        Sorry we're still computing your profile, good things take time
-      <% end %>
-    </div>
-  </div>
-</div>
 </div>
