@@ -4,15 +4,15 @@ require "rvm/capistrano"
 set :application, "demo"
 set :deploy_to, "/opt/#{application}"
 
-set :scm, :git 
+set :scm, :git
 set :scm_user, "moretto-nik"
-set :repository, "git@github.com:moretto-nik/beancounter.git"
+set :repository, "git@github.com:xpeppers/beancounter_rails.git"
 set :branch, "master"
 
 set :user, 'vagrant'
 set :scm_passphrase, "vagrant"
-ssh_options[:forward_agent] = true 
-default_run_options[:pty] = true 
+ssh_options[:forward_agent] = true
+default_run_options[:pty] = true
 
 role :web, "192.168.10.10"                         # Your HTTP server, Apache/etc
 role :app, "192.168.10.10"                         # This may be the same as your `Web` server
@@ -30,7 +30,7 @@ after "deploy:update", "deploy:cleanup"
 namespace :deploy do
   task :start do ; end
   task :stop do ; end
-  task :restart, :roles => :app, :except => { :no_release => true } do 
+  task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-  end  
+  end
 end
