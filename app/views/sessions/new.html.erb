@@ -1,23 +1,14 @@
-<style>
-h1.insetType {
-  padding-left: 50px; /* The padding is just there to move the h1 element to the center of the div */
-  padding-top: 17px;
-  font-family: Rockwell, Georgia, "Times New Roman", Times, serif;
-  font-size: 50px;
-  color: #0D4383;
-  text-shadow: rgba(0,0,0,0.5) -1px 0, rgba(0,0,0,0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px;
-}
-</style>
+<h1>BEANCOUNTER</h1>
 
-<div class="span10 clearfix" style="margin-top:20px;margin-bottom:40px;">
-  <h1 class="insetType" style="text-align: center;">Try Social Beancounter</h1>
-</div>
+<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit!</h3>
 
-<div class="social_buttons span10 clearfix">
-  <div class="inset span5 clearfix">
-    <%= link_to (raw('<div class="logo_wrapper"><span class="logo"></span></div><span>Login with Facebook</span>')), "http://#{BC_PLATFORM_HOST}:#{BC_PLATFORM_PORT}/beancounter-platform/rest/user/register/facebook/web?redirect=#{REDIRECT_PATH}/auth",:class =>"fb login_button" %>
-  </div>
-  <div class="inset span5 clearfix">
-    <%= link_to (raw('<div class="logo_wrapper"><span class="logo"></span></div><span>Login with Twitter</span>')), "http://#{BC_PLATFORM_HOST}:#{BC_PLATFORM_PORT}/beancounter-platform/rest/user/register/twitter/web?redirect=#{REDIRECT_PATH}/auth",:class =>"tw login_button" %>
-  </div>
+<div id="demo-frame">
+  <ul class="social">
+    <li class="fb">
+      <%= link_to 'Login with Facebook', "http://#{BC_PLATFORM_HOST}:#{BC_PLATFORM_PORT}/beancounter-platform/rest/user/register/facebook/web?redirect=#{REDIRECT_PATH}/auth", :class => 'fb' %>
+    </li>
+    <li class="tw">
+      <%= link_to 'Login with Twitter', "http://#{BC_PLATFORM_HOST}:#{BC_PLATFORM_PORT}/beancounter-platform/rest/user/register/twitter/web?redirect=#{REDIRECT_PATH}/auth", :class => 'tw' %>
+    </li>
+  </ul>
 </div>
