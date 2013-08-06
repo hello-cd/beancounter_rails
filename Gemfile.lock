@@ -1,10 +1,10 @@
 GIT
-  remote: git://github.com/archiloque/rest-client.git
-  revision: 2a32c7b3db297132afc03794dbdafe1fccaf1bd4
+  remote: git://github.com/rest-client/rest-client.git
+  revision: f36246ae2c3463ca4ebdd70dccf45b112a3ffe0f
   specs:
-    rest-client (1.6.7)
+    rest-client (1.7.0.alpha)
       mime-types (>= 1.16)
-      netrc
+      netrc (~> 0.7.7)
 
 GEM
   remote: https://rubygems.org/

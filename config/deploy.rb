@@ -1,22 +1,22 @@
 require "bundler/capistrano"
 require "rvm/capistrano"
 
-set :application, "uhopper.profilerix.demo"
-set :deploy_to, "/var/www/#{application}"
+set :application, "demo"
+set :deploy_to, "/opt/#{application}"
 
 set :scm, :git 
 set :scm_user, "moretto-nik"
 set :repository, "git@github.com:moretto-nik/beancounter.git"
 set :branch, "master"
 
-set :user, 'beancounter'
-set :scm_passphrase, "beancounterpwd7"
+set :user, 'vagrant'
+set :scm_passphrase, "vagrant"
 ssh_options[:forward_agent] = true 
 default_run_options[:pty] = true 
 
-role :web, "uhopper.profilerix.demo"                         # Your HTTP server, Apache/etc
-role :app, "uhopper.profilerix.demo"                         # This may be the same as your `Web` server
-role :db, "uhopper.profilerix.demo", :primary => true        # This is where Rails migrations will run
+role :web, "192.168.10.10"                         # Your HTTP server, Apache/etc
+role :app, "192.168.10.10"                         # This may be the same as your `Web` server
+role :db, "192.168.10.10", :primary => true        # This is where Rails migrations will run
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
