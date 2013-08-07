@@ -66,8 +66,7 @@ Beancounter::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  #REDIRECT_PATH = "http://profilerix.com"
-  REDIRECT_PATH = "http://192.168.10.10"
-  BC_PLATFORM_HOST = "192.168.10.10"
-  BC_PLATFORM_PORT = "8080"
+  REDIRECT_PATH = "http://2.229.5.19"
+  BC_PLATFORM_HOST =  "2.229.5.19"
+  BC_PLATFORM_PORT = "80"
 end

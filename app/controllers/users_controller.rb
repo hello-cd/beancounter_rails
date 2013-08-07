@@ -1,11 +1,11 @@
 # encoding: utf-8
 class UsersController < ApplicationController
-  #before_filter :signed_in
-  #before_filter :require_user
+  before_filter :signed_in
+  before_filter :require_user
 
   def show
     current_user = User.new(:username => params[:username], :token => params[:token])
-    #@interests, @categories = current_user.get_profile
+    @interests, @categories = current_user.get_profile
     if @interests.nil? || @categories.nil?
       @interests = []
       @categories = []
