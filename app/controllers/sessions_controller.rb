@@ -1,6 +1,6 @@
 # encoding: utf-8
 class SessionsController < ApplicationController
-  
+
   #sign_in_path
   def new
     if current_user!=nil
