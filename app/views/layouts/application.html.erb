@@ -11,6 +11,7 @@
   <!--a style="margin-left:2px;" class="brand" href="/users?token=<%#=current_user.token%>&username=<%#=current_user.username%>">Beancounter</a-->
   <section>
     <nav>
+      <%= image_tag "logo.png", :style => "height: 80px; width: 80px; position: absolute; top: 0;"%>
       <ul class="top-navigation">
         <li>
           <a>
@@ -31,7 +32,7 @@
       </ul>
     </nav>
     <%= render 'layouts/messages' %>
-    <div id="xxx">
+    <div>
       <%= yield %>
     </div>
   </section>
