@@ -28,8 +28,12 @@ class ApplicationSettings < ActiveRecord::Base
   end
 
   def self.check_status
-    RestClient.get("http://#{BC_PLATFORM_HOST}:#{BC_PLATFORM_PORT}/beancounter-platform/rest/api/check") do |req, res, result|
-      result.code == "200" && JSON.parse(req.body)["status"] == "OK"
+    begin
+      RestClient.get("http://#{BC_PLATFORM_HOST}:#{BC_PLATFORM_PORT}/beancounter-platform/rest/api/check") do |req, res, result|
+        result.code == "200" && JSON.parse(req.body)["status"] == "OK"
+      end
+    rescue
+      return false
     end
   end
 
