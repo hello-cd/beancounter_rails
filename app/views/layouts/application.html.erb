@@ -22,9 +22,9 @@
         <li>
           <a>
             <% if ApplicationSettings.check_status %>
-              <span style="background: rgba(68, 255, 143, 1); padding: 8px 10px; border-radius: 4px; color: white;">API ONLINE <%= ApplicationSettings.version %></span>
+              <span class="api-status online">API ONLINE <%= ApplicationSettings.version %></span>
             <% else %>
-              <span style="background: rgba(255, 68, 68, 1); padding: 8px 10px; border-radius: 4px; color: white;">API OFFLINE</span>
+              <span class="api-status offline">API OFFLINE</span>
             <% end %>
           </a>
         </li>

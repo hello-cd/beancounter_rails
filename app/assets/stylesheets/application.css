@@ -14,7 +14,7 @@
 
     html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
 
-    * { box-sizing: border-box; }
+    * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
     body {
 
@@ -24,7 +24,7 @@
 
       font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif; }
 
-    /* pagination */
+  /* pagination */
 
     section { padding: 110px 10% 0 10%; position: relative; }
 
@@ -54,27 +54,31 @@
 
     section > h2 { font-size: 22px; padding: 5px 0 20px; }
 
-    /* demo-frame */
+  /* demo-frame classes */
 
-    .social { margin: 100px auto; padding: 0 10%; text-align: center }
+    .social { margin: 100px auto; padding: 0; text-align: center }
 
-    .social li { display: inline-block; width: 49%; margin-right: 1%; text-align: left; border-radius: 5px; cursor:pointer; background: red; }
+    .social li { 
 
-    .social li:last-child { margin-right: 0; }
+      display: inline-block; width: 46%; margin: 0 1% 20px 0; min-width: 400px;
+
+      text-align: left; border-radius: 5px; cursor:pointer; }
 
     .social a, .social a:hover {
 
-      line-height: 55px; vertical-align: top; display: inline-block; width: 100%;
+      display: inline-block; vertical-align: top; width: 100%;
 
-      text-shadow: 2px 0 3px rgba(0,0,0,0.1); font-size: 32px; padding: 20px; color: white; text-decoration: none; border-bottom: 3px solid rgba(0,0,0,0.15); }
+      font-size: 28px; line-height: 55px; text-shadow: 2px 0 3px rgba(0,0,0,0.1);  
+
+      padding: 20px 0; color: white; text-decoration: none; border-bottom: 3px solid rgba(0,0,0,0.15); }
 
     .social a:before {
 
-      display: inline-block; vertical-align: top; margin-right: 65px; width: 40px; padding: 11px 44px 0 18px;
+      display: inline-block; vertical-align: top; width: 10%; margin-right: 6%; padding: 11px 6% 0 6%;
+      
+      font-family: FontAwesome; line-height: 44px; font-size: 54px; color: white; text-decoration: none; text-align: center;
 
-      font-family: FontAwesome; border-right: 2px solid rgba(255, 255, 255, 0.15);
-
-      line-height: 44px; font-size: 54px; color: white; text-decoration: none; text-align: center; }
+      text-shadow: 1px 1px rgba(255,255,255,0.2), -2px -2px rgba(0,0,0,0.2); border-right: 2px solid rgba(255, 255, 255, 0.15); }
 
     .social a.fb:before { content: '\f09a'; }
 
@@ -87,4 +91,46 @@
     .social li.tw { background: #5daed5; }
 
     .social li.tw:hover { background: #77C8EF; }
- */
+
+    .api-status { padding: 8px 10px; border-radius: 4px; color: white; border-bottom: 3px solid rgba(0,0,0,0.15); }
+    
+    .api-status.online { background: rgba(68, 255, 143, 1); }
+
+    .api-status.offline { background: rgba(255, 68, 68, 1); }
+
+  /* social-small overrides */
+
+    ul.social.social-small { 
+
+      display: inline-block; vertical-align: top; text-align: left; padding: 0; margin: 0; margin-left: 15px; width: 50%; 
+
+      line-height: 28px; }
+
+    ul.social.social-small li { 
+
+      width: 250px; min-width: 250px; max-width: 250px; }
+
+    ul.social.social-small a, ul.social.social-small a:hover, ul.social.social-small a:before { 
+
+      font-size: 14px; line-height: 28px; padding: 0; font-weight: normal !important; text-shadow: none !important; }
+
+    ul.social.social-small a:before { 
+
+      font-size: 23px; line-height: 35px; overflow: hidden; height: 28px; margin-right: 14px; padding: 0 8px; }
+
+  /* bootstrap overrides for tabs */
+
+    .nav-tabs { border-bottom: 5px solid #1abb9c !important; }
+
+    .nav-tabs li { padding: 0 !important;  }
+
+    .nav-tabs li a {
+
+      color: #1abb9c; background: #f0f0f0; border: none !important;
+
+      border-radius: 0 !important; line-height: 25px !important; font-size: 18px; 
+
+      padding: 5px 10px; height: 40px; margin: 0  0 1px 5px !important; cursor: pointer !important; }
+
+    .nav-tabs .active a, .nav-tabs .active a:hover, .nav-tabs a:hover { color: #fff !important; background: #1abb9c !important; }
+

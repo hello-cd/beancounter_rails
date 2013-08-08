@@ -11,26 +11,6 @@
     color: #0D4383;
     text-shadow: rgba(0,0,0,0.5) -1px 0, rgba(0,0,0,0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px, rgba(0,0,0,0.3) -1px -2px;
   }
-
-  ul.social { display: inline-block; vertical-align: top; text-align: left; padding: 0; margin: 0; margin-left: 15px; width: 50%; line-height: 28px; }
-
-  ul.social li { width: 200px; }
-
-  ul.social a, ul.social a:hover, ul.social a:before { font-size: 14px; line-height: 28px; padding: 0; font-weight: normal }
-
-  ul.social a:before { margin-right: 10px; }
-
-  .nav-tabs { border-bottom: 5px solid #1abb9c; }
-
-  .nav-tabs li { padding: 0 !important;  }
-
-  .nav-tabs li a {
-
-  color: #1abb9c; background: #f0f0f0; border: none !important;
-
-  border-radius: 0; line-height: 35px; font-size: 18px; padding: 5px 10px; height: 45px; margin: 0  0 5px 5px; cursor: pointer !important; }
-
-  .nav-tabs .active a, .nav-tabs .active a:hover, .nav-tabs a:hover { color: #fff !important; background: #1abb9c !important; }
 </style>
 
 <script type="text/javascript">
@@ -93,7 +73,7 @@ function hideModal(id){
 <!-- end modal -->
 <h1>
   Hi <%= current_user.name %>!
-  <ul class="social">
+  <ul class="social social-small">
     <li class="tw">
       <% if current_user.provider?(:twitter)%>
         <a href="https://twitter.com/intent/tweet?text=Sto%20analizzando%20il%20mio%20profilo%20su%20http://profilerix.com" class="tw">Share with Twitter</a>
