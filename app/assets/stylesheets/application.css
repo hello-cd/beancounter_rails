@@ -14,7 +14,7 @@
 
     html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
 
-    * { box-sizing: border-box; }
+    * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
     body {
 
@@ -56,25 +56,29 @@
 
     /* demo-frame */
 
-    .social { margin: 100px auto; padding: 0 10%; text-align: center }
+    .social { margin: 100px auto; padding: 0; text-align: center }
 
-    .social li { display: inline-block; width: 49%; margin-right: 1%; text-align: left; border-radius: 5px; cursor:pointer; background: red; }
+    .social li { 
 
-    .social li:last-child { margin-right: 0; }
+      display: inline-block; width: 46%; margin: 0 1% 20px 0; min-width: 400px;
+
+      text-align: left; border-radius: 5px; cursor:pointer; }
 
     .social a, .social a:hover {
 
-      line-height: 55px; vertical-align: top; display: inline-block; width: 100%;
+      display: inline-block; vertical-align: top; width: 100%;
 
-      text-shadow: 2px 0 3px rgba(0,0,0,0.1); font-size: 32px; padding: 20px; color: white; text-decoration: none; border-bottom: 3px solid rgba(0,0,0,0.15); }
+      font-size: 28px; line-height: 55px; text-shadow: 2px 0 3px rgba(0,0,0,0.1);  
+
+      padding: 20px 0; color: white; text-decoration: none; border-bottom: 3px solid rgba(0,0,0,0.15); }
 
     .social a:before {
 
-      display: inline-block; vertical-align: top; margin-right: 65px; width: 40px; padding: 11px 44px 0 18px;
+      display: inline-block; vertical-align: top; width: 10%; margin-right: 6%; padding: 11px 6% 0 6%;
+      
+      font-family: FontAwesome; line-height: 44px; font-size: 54px; color: white; text-decoration: none; text-align: center;
 
-      font-family: FontAwesome; border-right: 2px solid rgba(255, 255, 255, 0.15);
-
-      line-height: 44px; font-size: 54px; color: white; text-decoration: none; text-align: center; }
+      text-shadow: 1px 1px rgba(255,255,255,0.2), -2px -2px rgba(0,0,0,0.2); border-right: 2px solid rgba(255, 255, 255, 0.15); }
 
     .social a.fb:before { content: '\f09a'; }
 
