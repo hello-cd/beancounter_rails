@@ -24,7 +24,7 @@
 
       font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif; }
 
-    /* pagination */
+  /* pagination */
 
     section { padding: 110px 10% 0 10%; position: relative; }
 
@@ -54,7 +54,7 @@
 
     section > h2 { font-size: 22px; padding: 5px 0 20px; }
 
-    /* demo-frame */
+  /* demo-frame classes */
 
     .social { margin: 100px auto; padding: 0; text-align: center }
 
@@ -98,4 +98,22 @@
 
     .api-status.offline { background: rgba(255, 68, 68, 1); }
 
+  /* social-small overrides */
 
+    ul.social.social-small { 
+
+      display: inline-block; vertical-align: top; text-align: left; padding: 0; margin: 0; margin-left: 15px; width: 50%; 
+
+      line-height: 28px; }
+
+    ul.social.social-small li { 
+
+      width: 250px; min-width: 250px; max-width: 250px; }
+
+    ul.social.social-small a, ul.social.social-small a:hover, ul.social.social-small a:before { 
+
+      font-size: 14px; line-height: 28px; padding: 0; font-weight: normal !important; text-shadow: none !important; }
+
+    ul.social.social-small a:before { 
+
+      font-size: 23px; line-height: 35px; overflow: hidden; height: 28px; margin-right: 14px; padding: 0 8px; }
