@@ -87,4 +87,11 @@
     .social li.tw { background: #5daed5; }
 
     .social li.tw:hover { background: #77C8EF; }
- */
+
+    .api-status { padding: 8px 10px; border-radius: 4px; color: white; border-bottom: 3px solid rgba(0,0,0,0.15); }
+    
+    .api-status.online { background: rgba(68, 255, 143, 1); }
+
+    .api-status.offline { background: rgba(255, 68, 68, 1); }
+
+
