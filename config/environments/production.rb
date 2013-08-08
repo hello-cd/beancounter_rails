@@ -67,6 +67,6 @@ Beancounter::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   REDIRECT_PATH = "http://2.229.5.19"
-  BC_PLATFORM_HOST =  "2.229.5.19"
+  BC_PLATFORM_HOST =  "beancounter.xpeppers.com"
   BC_PLATFORM_PORT = "80"
 end
