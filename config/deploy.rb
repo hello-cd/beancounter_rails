@@ -9,22 +9,15 @@ set :scm_user, "moretto-nik"
 set :repository, "git@github.com:xpeppers/beancounter_rails.git"
 set :branch, "master"
 
-set :user, 'vagrant'
-set :scm_passphrase, "vagrant"
+set :user, 'deploy'
 ssh_options[:forward_agent] = true
+ssh_options[:keys] = ["#{ENV['HOME']}/.ssh/deploy"]
 default_run_options[:pty] = true
 
-role :web, "192.168.10.10"                         # Your HTTP server, Apache/etc
-role :app, "192.168.10.10"                         # This may be the same as your `Web` server
-role :db, "192.168.10.10", :primary => true        # This is where Rails migrations will run
+role :web, "10.0.1.250:2224"                         # Your HTTP server, Apache/etc
+role :app, "10.0.1.250:2224"                         # This may be the same as your `Web` server
+role :db,  "10.0.1.250:2224", :primary => true        # This is where Rails migrations will run
 
-# if you want to clean up old releases on each deploy uncomment this:
-# after "deploy:restart", "deploy:cleanup"
-
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
-
-# If you are using Passenger mod_rails uncomment this:
 set :keep_releases, 5
 after "deploy:update", "deploy:cleanup"
 namespace :deploy do
