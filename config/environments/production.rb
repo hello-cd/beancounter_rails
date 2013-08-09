@@ -66,7 +66,7 @@ Beancounter::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  REDIRECT_PATH = "http://beancounter.xpeppers.com"
+  REDIRECT_PATH = "http://beancounter.xpeppers.com:8080"
   BC_PLATFORM_HOST =  "beancounter.xpeppers.com"
   BC_PLATFORM_PORT = "80"
 end
