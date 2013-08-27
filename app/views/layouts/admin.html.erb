@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Beancounter - Admin</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "admin", :media => "all" %>
+  <%= javascript_include_tag 'application', 'highcharts','tagcanvas.min', 'bootstrap' %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>document.id = function(id){ return document.getElementById(id) }</script>
+</head>
+<body>
+	<%= yield %>
+</body>
+</html>

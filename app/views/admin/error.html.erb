@@ -1,0 +1,18 @@
+	<section id="admin-login">
+		<header>
+			<h1 style="padding-left:0">WARNING</h1>
+			<%= image_tag "logo.png", :style => "height: 70px; width: 70px; position: absolute; top: 0; right: 0;"%>
+		</header>
+		<form onsubmit="return false">
+			<h4 style="text-align:center">You dont have the permission to access this page!</h4>
+			<center>
+				<br>
+				<br>
+				<a href="/admin">LOGIN</a>
+				<br>
+				<br>
+				<small>You will be redirected to the login screen in <span id="redirect-seconds" style="font-weight:bold">5</span> seconds!</small>				
+			</center>
+		</form>
+	</section>
+	<script> setInterval(function () { var seconds = parseInt(document.id('redirect-seconds').innerText) - 1; document.id('redirect-seconds').innerText = seconds; if ( !seconds ) window.location.href='/admin/login' }, 1000); </script>
