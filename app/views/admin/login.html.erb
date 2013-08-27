@@ -3,81 +3,27 @@
 <head>
   <title>Beancounter - Admin</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "admin", :media => "all" %>
   <%= javascript_include_tag 'application', 'highcharts','tagcanvas.min', 'bootstrap' %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-
-	<style>
-
-		#admin-login { 
-
-			position: absolute; top: 50%; left: 50%; margin: -255px 0 0 -240px; width: 480px; padding: 0; 
-
-			background: white; }
-
-		#admin-login h1 { padding: 0; line-height: 15px; height: 15px; }
-
-		#admin-login form { margin-top: 100px; padding: 0 5%; width: 100%; text-align: right; }
-
-		#admin-login input { 
-			
-			display: inline-block; padding: 20px; width: 100%;
-
-			border-radius: 0; border: 2px solid #ccc; box-shadow: none; }
-
-		#admin-login input:focus { border: 2px solid rgb(26,187,156); }
-
-		#admin-login label { color:#888; font-size: 18px !important; text-align: left; margin-top: 15px; }
-
-		#admin-login button { 
-
-			display: inline-block;
-
-			width: 30%; padding: 10px; font-size: 20px; color: #fff; border-radius: 2px; margin: 20px auto 5px;
-
-			background: rgb(26,187,156); border: none; border-bottom: 3px solid rgba(0,0,0,0.1); }
-		
-		#admin-login-error {
-
-			display: inline-block; width: 68%; color: rgb(255, 102, 102);
-
-			text-align: center; height: 30px; padding: 10px; line-height: 20px; vertical-align: middle;
-
-			opacity: 1; transition: opacity 2s ease;
-		}
-
-		#admin-login header:after { display: none; }
-
-		section > nav { height: 80px;}
-
-	</style>
-
 	<section id="admin-login">
-		
 		<header>
 			<h1 style="padding-left:0">Login</h1>
 			<%= image_tag "logo.png", :style => "height: 70px; width: 70px; position: absolute; top: 0; right: 0;"%>
 		</header>
-
 		<form action="/admin/auth" method="post">
-
 			<label for="admin-username">Username</label>
-
-			<input id="admin-username" type="text" value="" placeholder="Insert username...">
-			
+			<input id="admin-username" name="username" type="text" value="" placeholder="Insert username...">
 			<label for="admin-password">Password</label>
-
-			<input id="admin-password" type="password" value="" placeholder="Insert password...">
-
+			<input id="admin-password" name="password" type="password" value="" placeholder="Insert password...">
 			<div id="admin-login-error" class="error">Wrong username or password!</div>
-
 			<script>setTimeout("(function(s){ s.opacity = 0 })(document.getElementById('admin-login-error').style)", 3000)</script>
-
 			<button>Login</button>
 		</form>
+		<script>document.getElementById('admin-username').focus();</script>
 	</section>
-	<script>document.getElementById('admin-username').focus();</script>
 </body>
 </html>

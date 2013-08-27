@@ -1,0 +1,31 @@
+	#admin-login { 
+
+		position: absolute; top: 50%; left: 50%; margin: -255px 0 0 -240px; width: 480px; padding: 0; background: white; }
+
+	#admin-login h1 { padding: 0; line-height: 15px; height: 15px; }
+
+	#admin-login form { margin-top: 100px; padding: 0 5%; width: 100%; text-align: right; }
+
+	#admin-login input { 
+		
+		display: inline-block; padding: 20px; width: 100%; border-radius: 0; border: 2px solid #ccc; box-shadow: none; }
+
+	#admin-login input:focus { border: 2px solid rgb(26,187,156); }
+
+	#admin-login label { color:#888; font-size: 18px !important; text-align: left; margin-top: 15px; }
+
+	#admin-login button { 
+
+		display: inline-block; width: 30%; padding: 10px; font-size: 20px; color: #fff; border-radius: 2px; 
+
+		margin: 20px auto 5px; background: rgb(26,187,156); border: none; border-bottom: 3px solid rgba(0,0,0,0.1); }
+	
+	#admin-login-error {
+
+		display: inline-block; width: 68%; height: 30px; padding: 10px; line-height: 20px; 
+
+		color: rgb(255, 102, 102); text-align: center;  vertical-align: middle; opacity: 1; transition: opacity 2s ease; }
+
+	#admin-login header:after { display: none; }
+
+	section > nav { height: 80px;}
