@@ -9,10 +9,9 @@
 			<label for="admin-password">Password</label>
 			<input id="admin-password" name="password" type="password" value="" placeholder="Insert password...">
 			<div id="admin-login-error" class="error"><%= flash[:notice] %></div>
-			<script>
-				setTimeout("(function(s){ s.opacity = 0 })(document.getElementById('admin-login-error').style)", 3000)
-			</script>
 			<button>Login</button>
 		</form>
-		<script>document.getElementById('admin-username').focus();</script>
+		<script>
+			setTimeout(function(){ $('#admin-login-error').css('opacity', 0) }, 3000); $('#admin-username').focus();
+		</script>
 	</section>

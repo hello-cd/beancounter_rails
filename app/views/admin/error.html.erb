@@ -15,4 +15,9 @@
 			</center>
 		</form>
 	</section>
-	<script> setInterval(function () { var seconds = parseInt(document.id('redirect-seconds').innerText) - 1; document.id('redirect-seconds').innerText = seconds; if ( !seconds ) window.location.href='/admin/login' }, 1000); </script>
+	<script>
+		setInterval(function () { 
+			var s; $('#redirect-seconds').text( s = parseInt($('#redirect-seconds').text(), 10)-1); 
+			if ( !s ) window.location.href='/admin/login'
+		}, 1000);
+	</script>
