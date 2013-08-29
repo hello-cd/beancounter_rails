@@ -16,8 +16,8 @@ class AdminController < ActionController::Base
   end
 
   def auth
-    admin = Admin.new(params[:username])
-    if admin.authenticate(params[:password]) 
+    admin = Admin.find_by_username(params[:username])
+    if admin.present? && admin.authenticate(params[:password])
       session[:admin] = admin
       redirect_to admin_dashboard_url
     else
