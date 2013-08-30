@@ -11,30 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120719100735) do
+ActiveRecord::Schema.define(:version => 20130829143447) do
+
+  create_table "admins", :force => true do |t|
+    t.integer  "application_setting_id"
+    t.string   "username"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
 
   create_table "application_settings", :force => true do |t|
     t.string   "api_name"
     t.string   "api_value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "users", :force => true do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "name"
-    t.string   "username_beancounter"
-    t.string   "password_beancounter"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "sex"
-    t.integer  "click"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
-    t.string   "oauth_token"
-    t.string   "oauth_secret"
   end
 
 end

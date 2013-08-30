@@ -1,4 +1,4 @@
-class ApplicationSettings < ActiveRecord::Base
+class ApplicationSetting < ActiveRecord::Base
   attr_accessible :api_name, :api_value
 
   require "uri"
@@ -13,7 +13,7 @@ class ApplicationSettings < ActiveRecord::Base
     }) do | req, res, result|
       if result.code == "200"
         api_key = JSON.parse(req.body)["object"]
-        ApplicationSettings.new(:api_name => "bc", :api_value => api_key).save
+        ApplicationSetting.new(:api_name => "bc", :api_value => api_key).save
       else
         false
       end
@@ -21,10 +21,10 @@ class ApplicationSettings < ActiveRecord::Base
   end
 
   def self.api_key
-    if ApplicationSettings.all.empty?
+    if ApplicationSetting.all.empty?
       generate_beancounter_api_key
     end
-    ApplicationSettings.first.api_value
+    ApplicationSetting.first.api_value
   end
 
   def self.check_status

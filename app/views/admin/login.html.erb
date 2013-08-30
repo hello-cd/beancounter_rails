@@ -1,0 +1,17 @@
+	<section id="admin-login">
+		<header>
+			<h1 style="padding-left:0">Login</h1>
+			<%= image_tag "logo.png", :style => "height: 70px; width: 70px; position: absolute; top: 0; right: 0;"%>
+		</header>
+		<form action="/admin/auth" method="post">
+			<label for="admin-username">Username</label>
+			<input id="admin-username" name="username" type="text" value="" placeholder="Insert username...">
+			<label for="admin-password">Password</label>
+			<input id="admin-password" name="password" type="password" value="" placeholder="Insert password...">
+			<div id="admin-login-error" class="error"><%= flash[:notice] %></div>
+			<button>Login</button>
+		</form>
+		<script>
+			setTimeout(function(){ $('#admin-login-error').css('opacity', 0) }, 3000); $('#admin-username').focus();
+		</script>
+	</section>

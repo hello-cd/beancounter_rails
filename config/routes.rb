@@ -5,5 +5,11 @@ Beancounter::Application.routes.draw do
   match 'auth', to: 'sessions#create'
   match 'sign_in', to: 'sessions#new', as: 'sign_in'
   match 'sign_out', to: 'sessions#destroy', as: 'sign_out'
+  match '/admin', to: redirect('/admin/login')
+  match '/admin/dashboard', to: 'admin#dashboard'
+  match '/admin/auth', to: 'admin#auth'
+  match '/admin/error', to: 'admin#error'
+  match '/admin/login', to: 'admin#login'
+  match '/admin/logout', to: 'admin#logout'
   root :to => redirect('/sign_in')
 end
