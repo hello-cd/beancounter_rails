@@ -1,48 +1,48 @@
-	<script>
-		function click_to_toggle (el) {
-			$(el).find('span.toggler').toggleClass('click-to-close');
-			$(el).next().toggle();
-		}
-	</script>
-	<section id="dashboard">
-		<header>
-			<h4 style="padding-left:0">ADMIN DASHBOARD <small>[ <a href="/admin/logout">Logout</a> ]</small></h4> 	
-			<%= image_tag "logo.png", :style => "height: 70px; width: 70px; position: absolute; top: 0; right: 0;"%>
-		</header>
-		<div style="min-width: 960px; min-height: 600px; background:white">
-			<nav>
-				<ul>
-					<li class="active"><a href="#">Elenco Utenti</a></li>
-					<li><a href="#">Statistics</a></li>
-				</ul>
-			</nav>
-			<table>
-				<tr>
-					<th>Lorem</th>
-					<th>Ipsum</th>
-					<th>Dolor</th>
-					<th>Et</th>
-					<th>Amet</th>
-					<th>&nbsp;</th>
-				</tr>
-				<!-- bof fake data -->
-				<% 20.times do |i| %>
-				<tr onclick="click_to_toggle(this)" class="toggler-click">
-					<% 5.times do %>
-					<td> <%= (0...10).map{ ('a'..'z').to_a[rand(26)] }.join %> </td>
-					<% end %>
-					<td>
-						<span class="toggler">&raquo;</span>
-					</td>
-				</tr>
-				<tr hidden class="toggler-data">
-					<td colspan="6">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, necessitatibus, possimus eum delectus qui voluptatum maxime quas. Ipsam, fugit quo provident veritatis reprehenderit eos in hic quas at.</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, minus vel totam illo culpa voluptas odit. Odit, blanditiis, dolores, laborum at quae dolorum mollitia ab molestias optio aperiam culpa esse!</p>
-					</td>
-				</tr>
-				<% end %>
-				<!-- eof fake data -->
-			</table>
-		</div>
-	</section>
+  <script>
+    function click_to_toggle (el) {
+      $(el).find('span.toggler').toggleClass('click-to-close');
+      $(el).next().toggle();
+    }
+  </script>
+  <section id="dashboard">
+    <header>
+      <h4 style="padding-left:0">ADMIN DASHBOARD <small>[ <a href="/admin/logout">Logout</a> ]</small></h4>   
+      <%= image_tag "logo.png", :style => "height: 70px; width: 70px; position: absolute; top: 0; right: 0;"%>
+    </header>
+    <div style="min-width: 960px; min-height: 600px; background:white">
+      <nav>
+        <ul>
+          <li class="active"><a href="#">Elenco Utenti</a></li>
+          <li><a href="#">Statistics</a></li>
+        </ul>
+      </nav>
+      <table>
+        <tr>
+          <th>Lorem</th>
+          <th>Ipsum</th>
+          <th>Dolor</th>
+          <th>Et</th>
+          <th>Amet</th>
+          <th>&nbsp;</th>
+        </tr>
+        <!-- bof fake data -->
+        <% 20.times do |i| %>
+        <tr onclick="click_to_toggle(this)" class="toggler-click">
+          <% 5.times do %>
+          <td> <%= (0...10).map{ ('a'..'z').to_a[rand(26)] }.join %> </td>
+          <% end %>
+          <td>
+            <span class="toggler">&raquo;</span>
+          </td>
+        </tr>
+        <tr hidden class="toggler-data">
+          <td colspan="6">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, necessitatibus, possimus eum delectus qui voluptatum maxime quas. Ipsam, fugit quo provident veritatis reprehenderit eos in hic quas at.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, minus vel totam illo culpa voluptas odit. Odit, blanditiis, dolores, laborum at quae dolorum mollitia ab molestias optio aperiam culpa esse!</p>
+          </td>
+        </tr>
+        <% end %>
+        <!-- eof fake data -->
+      </table>
+    </div>
+  </section>
