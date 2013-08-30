@@ -9,6 +9,7 @@ class Activity
   attr_accessible :timestamp, :verb, :url, :name, :categories
 
   def initialize(json)
+    send("categories=", [])
     send("verb=", json["verb"])
     send("timestamp=", json["context"]["date"])
   end

@@ -81,4 +81,43 @@
 
   .toggler-click { cursor:pointer; }
 
-  .toggler-data { background: rgba(0,0,0,0.03); }
+  .toggler-data { /*background: rgba(0,0,0,0.03); */ }
+
+
+  /* styling of toggler-data content */
+
+  tr td:first-child, tr th:first-child { text-align: left; padding-left: 10px; }
+
+  #activities { text-align: left; padding-left: 0; padding-right: 10px; margin: 0 }
+
+  #activities li { background: transparent; padding-top: 0; margin-top: 10px }
+
+  #activities .tag { display: inline-block; padding: 2px 5px; border-radius: 3px; background: rgba(0,0,0,0.1); color: #666; }
+
+  #activities .tag[data-provider="twitter"]{ background: #00a0d1; color: white; }
+
+  #activities .tag[data-provider="facebook"]{ background: #3b5998; color: white; }
+
+  #activities .tag.date { float: right; }
+
+  #activities .tag.name { }
+
+  #activities .tag.category { }
+
+
+
+  /* #activities .tag .tag { padding: 0 5px;} */
+
+  
+
+  /*
+
+
+    .user-profile { border-radius: 5px }
+
+    .user-picture span { font-size: 25px; position: absolute; top: 20px; left: 65px; color: #1abb9c;} 
+
+    a:hover { color: #666 }
+  */
+
+

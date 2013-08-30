@@ -24,34 +24,59 @@
           <th>Email</th>
           <th>&nbsp;</th>
         </tr>
-        <!-- bof fake data -->
         <% @users.each do |user| %>
         <tr onclick="click_to_toggle(this)" class="toggler-click">
-          <td> <%= image_tag user.picture %> <%= user.provider %></td>
-          <td> <%= user.username %> </td>
-          <td> <%= user.full_name %> </td>
-          <td> <%= user.email %> </td>
+          <td>
+              <%= image_tag user.picture, :class => "user-picture" %>
+          </td>
+          <td>
+            <span class="provider icon-<%= user.provider.downcase %>-sign"></span> <%= user.username %>
+          </td>
+          <td>
+            <%= user.full_name %>
+          </td>
+          <td>
+            <%= user.email %>
+          </td>
           <td>
             <span class="toggler">&raquo;</span>
           </td>
         </tr>
         <tr hidden class="toggler-data">
           <td colspan="6">
-            <ul>
+            <ul id="activities">
               <% user.activities(session[:admin]).each do |activity| %>
                 <li>
-                  <%= activity.date %> |
-                  <%= activity.verb %> |
-                  <%= activity.url %> |
-                  <%= activity.name %> |
-                  <%= activity.categories %>
+                  <span class="tag date">
+                    <%= activity.date.strftime("%d-%m-%y %H:%M:%S") %>
+                  </span>
+                  
+                  <span class="tag" data-provider="<%= user.provider %>">
+                    <span class="icon-<%= user.provider.downcase %>-sign"></span>
+                    <%= activity.verb %>
+                  </span>
+                  
+                  <% if activity.name.present? %>
+                    <span class="tag ">
+                      <a href="<%= activity.url %>">URL</a>
+                    </span>
+                  <% end %>
+
+                  <% if activity.name.present? %>
+                    <span class="tag name"><i class="icon-comment-alt"></i> <%= activity.name %></span>                   
+                  <% end %>
+
+                  <% #activity.categories.each do |category| %>
+                  <% ['test', 'and', 'delete', 'me'].each do |category| %>
+                    
+                    <span class="tag category"><i class="icon-tags"></i> <%= category %></span>
+                  <% end %>      
                 </li>
               <% end %>
             </ul>
           </td>
         </tr>
         <% end %>
-        <!-- eof fake data -->
       </table>
     </div>
   </section>
