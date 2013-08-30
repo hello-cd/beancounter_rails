@@ -8,7 +8,9 @@ class AdminController < ActionController::Base
   end
 
   def login
-    return redirect_to admin_dashboard_url if logged?
+    if logged? && !admin.super?
+      return redirect_to admin_dashboard_url
+    end
   end
 
   def dashboard

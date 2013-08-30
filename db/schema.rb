@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130829143447) do
+ActiveRecord::Schema.define(:version => 20130830155324) do
 
   create_table "admins", :force => true do |t|
     t.integer  "application_setting_id"
     t.string   "username"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+    t.boolean  "super"
   end
 
   create_table "application_settings", :force => true do |t|
