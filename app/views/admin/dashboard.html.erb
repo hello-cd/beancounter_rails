@@ -16,30 +16,38 @@
           <li><a href="#">Statistics</a></li>
         </ul>
       </nav>
-      <%= @users %>
       <table>
         <tr>
-          <th>Lorem</th>
-          <th>Ipsum</th>
-          <th>Dolor</th>
-          <th>Et</th>
-          <th>Amet</th>
+          <th>Picture</th>
+          <th>Id</th>
+          <th>Full Name</th>
+          <th>Email</th>
           <th>&nbsp;</th>
         </tr>
         <!-- bof fake data -->
-        <% 20.times do |i| %>
+        <% @users.each do |user| %>
         <tr onclick="click_to_toggle(this)" class="toggler-click">
-          <% 5.times do %>
-          <td> <%= (0...10).map{ ('a'..'z').to_a[rand(26)] }.join %> </td>
-          <% end %>
+          <td> <%= image_tag user.picture %> <%= user.provider %></td>
+          <td> <%= user.username %> </td>
+          <td> <%= user.full_name %> </td>
+          <td> <%= user.email %> </td>
           <td>
             <span class="toggler">&raquo;</span>
           </td>
         </tr>
         <tr hidden class="toggler-data">
           <td colspan="6">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, necessitatibus, possimus eum delectus qui voluptatum maxime quas. Ipsam, fugit quo provident veritatis reprehenderit eos in hic quas at.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, minus vel totam illo culpa voluptas odit. Odit, blanditiis, dolores, laborum at quae dolorum mollitia ab molestias optio aperiam culpa esse!</p>
+            <ul>
+              <% user.activities(session[:admin]).each do |activity| %>
+                <li>
+                  <%= activity.date %> |
+                  <%= activity.verb %> |
+                  <%= activity.url %> |
+                  <%= activity.name %> |
+                  <%= activity.categories %>
+                </li>
+              <% end %>
+            </ul>
           </td>
         </tr>
         <% end %>
