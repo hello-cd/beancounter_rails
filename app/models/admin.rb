@@ -11,6 +11,15 @@ class Admin < ActiveRecord::Base
     end
   end
 
+  def users
+    RestClient.get("http://#{BC_PLATFORM_HOST}:#{BC_PLATFORM_PORT}/beancounter-platform/rest/user/all?apikey=#{application_setting.api_value}") do |req, res, status|
+      json_response = JSON.parse(res.body)
+      if status.code == "200" && json_response["status"] == "OK"
+        return json_response["object"]
+      end
+    end
+  end
+
   private
     def admin?
       true
