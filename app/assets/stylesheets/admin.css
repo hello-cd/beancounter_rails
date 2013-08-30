@@ -69,7 +69,16 @@
 
 	th, td { padding: 10px 0; text-align: center; border-bottom: 1px solid rgba(0,0,0,0.1); }
 	
+	tr:first-child { border-bottom: 3px solid rgba(0,0,0,0.1); }
+
 	tr:last-child td { border: 0; }
 
 	th { font-weight: bold; }
 
+	tr span.toggler { font-size: 18px; display: block; color: #555; -webkit-transform:rotate(90deg); transform:rotate(90deg); }
+
+	tr span.toggler.click-to-close { -webkit-transform:rotate(270deg); transform:rotate(270deg); }
+
+	.toggler-click { cursor:pointer; }
+
+	.toggler-data { background: rgba(0,0,0,0.03); }
