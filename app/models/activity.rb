@@ -8,14 +8,13 @@ class Activity
   attr_accessor :timestamp, :verb, :url, :name, :categories
   attr_accessible :timestamp, :verb, :url, :name, :categories
 
-  def initialize(attributes = {})
-    attributes.each do |name, value|
-      send("#{name}=", value)
-    end
+  def initialize(json)
+    send("verb=", json["verb"])
+    send("timestamp=", json["context"]["date"])
   end
 
   def date
-    Time.at(timestamp / 1000.0)
+    Time.at(timestamp / 1000.0) if timestamp
   end
 
 end

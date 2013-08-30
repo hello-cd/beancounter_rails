@@ -63,10 +63,7 @@ class User
     activities = []
     json_activities(admin).each do |json|
       json_activity = json["activity"]
-      activity = Activity.new(:timestamp => json_activity["context"]["date"], :verb => json_activity["verb"])
-      activity.url = json_activity["object"]["urls"] || json_activity["object"]["link"] || json_activity["object"]["url"]
-      activity.name = json_activity["object"]["name"] || json_activity["object"]["text"]
-      activity.categories = json_activity["object"]["categories"]
+      activity = Kernel.const_get("Activity").const_get(json_activity["verb"].titleize).new(json_activity)
       activities << activity
     end
     activities
