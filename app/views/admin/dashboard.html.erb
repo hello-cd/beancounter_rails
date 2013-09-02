@@ -67,10 +67,11 @@
                       <i class="icon-comment-alt"></i> <%= activity.name %>
                     <% end %>
                     <% activity.url.each do |url| %> 
-                      <%= link_to url, 'http://' + url.sub(/^https?\:\/\//, '') %>
+                      &raquo; <%= link_to url.sub(/^https?\:\/\//, '').sub(/^www\./, '').sub(/\/+$/, ''), 'http://' + url.sub(/^https?\:\/\//, '') %>
                     <% end %>
                   </span>
                   <% end %>
+
                   <% activity.categories.each do |category| %>
                   <span class="tag category"><i class="icon-tags"></i> <%= category %></span>
                   <% end %>
