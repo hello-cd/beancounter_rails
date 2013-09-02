@@ -19,7 +19,7 @@
       <table>
         <tr>
           <th>Picture</th>
-          <th>Id</th>
+          <th class="align-left">Id</th>
           <th>Full Name</th>
           <th>Email</th>
           <th>&nbsp;</th>
@@ -29,7 +29,7 @@
           <td>
               <%= image_tag user.picture, :class => "user-picture" %>
           </td>
-          <td>
+          <td class="align-left">
             <span class="provider icon-<%= user.provider.downcase %>-sign"></span> <%= user.username %>
           </td>
           <td>
@@ -48,27 +48,28 @@
               <% user.activities(session[:admin]).each do |activity| %>
                 <li>
                   <span class="tag date">
-                    <%= activity.date.strftime("%d-%m-%y %H:%M:%S") %>
+                    <i class="icon-calendar"></i> <%= activity.date.strftime("%d-%m-%y %H:%M:%S") %>
                   </span>
-
+                  
+                  <% if activity.verb == "FAVOURITE" %>
+                  <span class="tag" style="background: #1abb9c; color: #fff">
+                    <i class="icon-star"></i> <%= activity.verb %>
+                  </span>
+                  <% else %>
                   <span class="tag" data-provider="<%= user.provider %>">
-                    <span class="icon-<%= user.provider.downcase %>-sign"></span>
-                    <%= activity.verb %>
+                    <i class="icon-<%= user.provider.downcase %>-sign"></i> <%= activity.verb %>
                   </span>
-
-                  <%#TODO sistemare la url!!!!!%>
-                  <% if activity.url.present? %>
-                    <span class="tag ">
-                      <a href="<%= activity.url %>">URL</a>
-                    </span>
                   <% end %>
 
                   <% if activity.name.present? %>
-                    <span class="tag name"><i class="icon-comment-alt"></i> <%= activity.name %></span>
-                  <% end %>
+                  <span class="tag name">
+                    <i class="icon-comment-alt"></i> <%= activity.name %>
+                    <% if activity.url.present? %> | <a href="<%= activity.url %>">LINK</a><% end %>
+                  </span>
+                  <% end %>                
 
                   <% activity.categories.each do |category| %>
-                    <span class="tag category"><i class="icon-tags"></i> <%= category %></span>
+                  <span class="tag category"><i class="icon-tags"></i> <%= category %></span>
                   <% end %>
                 </li>
               <% end %>
