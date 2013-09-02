@@ -49,10 +49,10 @@ class Customer < ActiveRecord::Base
   end
 
   def self.api_key
-    if ApplicationSetting.all.empty?
+    if Customer.all.empty?
       generate_beancounter_api_key
     end
-    ApplicationSetting.first.api_value
+    Customer.first.api_value
   end
 
   def self.check_status

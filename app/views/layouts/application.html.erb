@@ -21,8 +21,8 @@
         </li>
         <li>
           <a>
-            <% if ApplicationSetting.check_status %>
-              <span class="api-status online">API ONLINE <%= ApplicationSetting.version %></span>
+            <% if Customer.check_status %>
+              <span class="api-status online">API ONLINE <%= Customer.version %></span>
             <% else %>
               <span class="api-status offline">API OFFLINE</span>
             <% end %>
