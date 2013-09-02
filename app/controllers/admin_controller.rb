@@ -12,8 +12,7 @@ class AdminController < ActionController::Base
 
   def login
     if logged?
-      redirect_to current_admin.customer.super? ? admin_customers_dashboard_url :
-                                                  admin_dashboard_url(current_admin.customer)
+      redirect_to admin_dashboard
     end
   end
 
@@ -25,16 +24,12 @@ class AdminController < ActionController::Base
 
   def auth
     admin = Admin.find_by_username(params[:username])
-    if admin.present? && admin.authenticate(params[:password])
-      session[:admin_id] = admin.id
-      if admin.customer.super?
-        redirect_to admin_customers_dashboard_url
-      else
-        redirect_to admin_dashboard_url(admin.customer)
-      end
-    else
+    if admin.nil? || !admin.authenticate(params[:password])
       redirect_to admin_login_url, :notice => 'Username or password do not match!'
     end
+
+    session[:admin_id] = admin.id
+    redirect_to admin_dashboard
   end
 
   def customers_dashboard
@@ -48,18 +43,26 @@ class AdminController < ActionController::Base
 
   private
 
+    def admin_dashboard
+      if current_admin.super?
+        admin_customers_dashboard_url
+      else
+        admin_dashboard_url(current_admin.customer)
+      end
+    end
+
     def logged?
       session[:admin_id].present?
     end
 
     def only_super_admin
-      if !logged? || !current_admin.customer.super?
+      if !logged? || !current_admin.super?
         redirect_to admin_login_url
       end
     end
 
     def only_my_dashboard
-      if current_admin.customer_id != params[:id].to_i
+      if !current_admin.super? && current_admin.customer_id != params[:id].to_i
         redirect_to admin_login_url
       end
     end

@@ -1,6 +1,7 @@
 class Admin < ActiveRecord::Base
   attr_accessible :username
   belongs_to :customer
+  delegate :super?, :to => :customer
 
   def authenticate (password)
     return false unless admin?
