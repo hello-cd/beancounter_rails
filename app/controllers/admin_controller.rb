@@ -9,24 +9,33 @@ class AdminController < ActionController::Base
 
   def login
     if logged? && !admin.super?
-      return redirect_to admin_dashboard_url
+      redirect_to admin_dashboard_url(admin.customer)
     end
   end
 
   def dashboard
-    admin = session[:admin]
-    @users = admin.users
-    return redirect_to admin_error_url unless logged?
+    customer = Customer.find(params[:id])
+    @users = customer.users
+    redirect_to admin_error_url unless logged?
   end
 
   def auth
     admin = Admin.find_by_username(params[:username])
     if admin.present? && admin.authenticate(params[:password])
-      session[:admin] = admin
-      redirect_to admin_dashboard_url
+      if admin.customer.super?
+        session[:admin] = admin
+        redirect_to admin_customers_dashboard_url
+      else
+        session[:admin] = admin
+        redirect_to admin_dashboard_url(admin.customer)
+      end
     else
       redirect_to admin_login_url, :notice => 'Username or password do not match!'
     end
+  end
+
+  def customers_dashboard
+    @customers = Customer.find_all_by_super(false)
   end
 
   private

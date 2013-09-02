@@ -1,0 +1,40 @@
+  <script>
+    function click_to_toggle (el) {
+      $(el).find('span.toggler').toggleClass('click-to-close');
+      $(el).next().toggle();
+    }
+  </script>
+  <section id="dashboard">
+    <header>
+      <h4 style="padding-left:0">ADMIN DASHBOARD <small>[ <a href="/admin/logout">Logout</a> ]</small></h4>
+      <%= image_tag "logo.png", :style => "height: 70px; width: 70px; position: absolute; top: 0; right: 0;"%>
+    </header>
+    <div style="min-width: 960px; min-height: 600px; background:white">
+      <nav>
+        <ul>
+          <li class="active"><a href="#">Elenco Clienti</a></li>
+          <li><a href="#">Statistics</a></li>
+        </ul>
+      </nav>
+      <table>
+        <tr>
+          <th>Profile</th>
+          <th>Customer</th>
+          <th class="align-left">Api Key</th>
+        </tr>
+        <% @customers.each do |customer| %>
+        <tr onclick="click_to_toggle(this)" class="toggler-click">
+          <td>
+            <%= link_to "LINK", admin_dashboard_url(customer) %>
+          </td>
+          <td>
+            <%= customer.api_name %>
+          </td>
+          <td class="align-left">
+            <%= customer.api_value %>
+          </td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+  </section>

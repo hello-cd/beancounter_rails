@@ -50,7 +50,7 @@ class User
   end
 
   def json_activities(admin)
-    RestClient.get("http://#{BC_PLATFORM_HOST}:#{BC_PLATFORM_PORT}/beancounter-platform/rest/activities/search?path=activity.username&value=#{username}&apikey=#{admin.application_setting.api_value}") do |req, res, result|
+    RestClient.get("http://#{BC_PLATFORM_HOST}:#{BC_PLATFORM_PORT}/beancounter-platform/rest/activities/search?path=activity.username&value=#{username}&apikey=#{admin.customer.api_value}") do |req, res, result|
       if result.code == "200" && JSON.parse(req.body)["status"] == "OK"
         JSON.parse(req.body)['object']
       else

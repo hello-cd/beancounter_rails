@@ -6,7 +6,8 @@ Beancounter::Application.routes.draw do
   match 'sign_in', to: 'sessions#new', as: 'sign_in'
   match 'sign_out', to: 'sessions#destroy', as: 'sign_out'
   match '/admin', to: redirect('/admin/login')
-  match '/admin/dashboard', to: 'admin#dashboard'
+  match '/admin/:id/dashboard', to: 'admin#dashboard', as: 'admin_dashboard'
+  match '/admin/customers_dashboard', to: 'admin#customers_dashboard', as: 'admin_customers_dashboard'
   match '/admin/auth', to: 'admin#auth'
   match '/admin/error', to: 'admin#error'
   match '/admin/login', to: 'admin#login'
