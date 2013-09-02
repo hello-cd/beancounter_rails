@@ -4,7 +4,7 @@ class Activity::Like < Activity
   def initialize(json)
     super(json)
     begin
-      send("url=", json.fetch("object").fetch("url"))
+      send("url=", [json.fetch("object").fetch("url")])
       send("name=", json.fetch("object").fetch("name"))
       send("categories=", json.fetch("object").fetch("categories"))
     rescue Exception => e
