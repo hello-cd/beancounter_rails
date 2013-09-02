@@ -3,9 +3,13 @@ class Activity::Like < Activity
 
   def initialize(json)
     super(json)
-    send("url=", json["object"]["url"])
-    send("name=", json["object"]["name"])
-    send("categories=", json["object"]["categories"])
+    begin
+      send("url=", json.fetch("object").fetch("url"))
+      send("name=", json.fetch("object").fetch("name"))
+      send("categories=", json.fetch("object").fetch("categories"))
+    rescue Exception => e
+      Rails.logger.error e.message
+    end
   end
 end
 

@@ -9,9 +9,13 @@ class Activity
   attr_accessible :timestamp, :verb, :url, :name, :categories
 
   def initialize(json)
-    send("categories=", [])
-    send("verb=", json["verb"])
-    send("timestamp=", json["context"]["date"])
+    begin
+      send("categories=", [])
+      send("verb=", json.fetch("verb"))
+      send("timestamp=", json.fetch("context")["date"])
+    rescue Exception => e
+      Rails.logger.error e.message
+    end
   end
 
   def date

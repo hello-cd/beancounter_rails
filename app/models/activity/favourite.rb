@@ -3,7 +3,11 @@ class Activity::Favourite < Activity
 
   def initialize(json)
     super(json)
-    send("url=", json["object"]["link"])
+    begin
+      send("url=", json.fetch("object").fetch("link"))
+    rescue Exception => e
+      Rails.logger.error e.message
+    end
   end
 end
 
