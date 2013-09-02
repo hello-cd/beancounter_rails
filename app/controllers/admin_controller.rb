@@ -8,8 +8,10 @@ class AdminController < ActionController::Base
   end
 
   def login
-    if logged? && !admin.super?
-      redirect_to admin_dashboard_url(admin.customer)
+    if logged?
+      admin = session[:admin]
+      redirect_to admin.customer.super? ? admin_customers_dashboard_url :
+                                          admin_dashboard_url(admin.customer)
     end
   end
 
