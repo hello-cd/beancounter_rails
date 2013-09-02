@@ -1,12 +1,12 @@
   <script>
-    function click_to_toggle (el) {
-      $(el).find('span.toggler').toggleClass('click-to-close');
-      $(el).next().toggle();
-    }
+    function click_to_toggle (el) { $(el).find('span.toggler').toggleClass('click-to-close'); $(el).next().toggle(); }
   </script>
   <section id="dashboard">
     <header>
-      <h4 style="padding-left:0">ADMIN DASHBOARD <small>[ <a href="/admin/logout">Logout</a> ]</small></h4>
+      <h4>
+        ADMIN DASHBOARD &raquo; <%= session[:admin].api_name %> 
+        <a href="/admin/logout">&nbsp;<small>[ Logout ]</small></a>
+      </h4>
       <%= image_tag "logo.png", :style => "height: 70px; width: 70px; position: absolute; top: 0; right: 0;"%>
     </header>
     <div style="min-width: 960px; min-height: 600px; background:white">
@@ -52,7 +52,7 @@
                   </span>
                   
                   <% if activity.verb == "FAVOURITE" %>
-                  <span class="tag" style="background: #1abb9c; color: #fff">
+                  <span class="tag bean">
                     <i class="icon-star"></i> <%= activity.verb %>
                   </span>
                   <% else %>
@@ -61,13 +61,16 @@
                   </span>
                   <% end %>
 
-                  <% if activity.name.present? %>
+                  <% if activity.name.present? ||  activity.url.present? %>
                   <span class="tag name">
-                    <i class="icon-comment-alt"></i> <%= activity.name %>
-                    <% if activity.url.present? %> | <a href="<%= activity.url %>">LINK</a><% end %>
+                    <% if activity.name.present? %>
+                      <i class="icon-comment-alt"></i> <%= activity.name %>
+                    <% end %>
+                    <% activity.url.each do |url| %> 
+                      <%= link_to url, 'http://' + url.sub(/^https?\:\/\//, '') %>
+                    <% end %>
                   </span>
-                  <% end %>                
-
+                  <% end %>
                   <% activity.categories.each do |category| %>
                   <span class="tag category"><i class="icon-tags"></i> <%= category %></span>
                   <% end %>

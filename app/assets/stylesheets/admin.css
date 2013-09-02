@@ -104,6 +104,8 @@
 
   #activities .tag.date { float: right; }
 
+  #activities .tag.bean { background: #1abb9c; color: #fff }
+
   #activities .tag.name { }
 
   #activities .tag.category { }
@@ -111,3 +113,12 @@
   .provider { font-size: 22px; line-height: 14px; padding-right: 20px; display: inline-block; }
 
   [class*="icon-"]{ background: none; }
+
+  h4 { padding-left:0; text-transform: uppercase; }
+
+  h4 a { display: inline-block; color: #fff; text-decoration: none; }
+
+  h4 a:hover { color: #fff; text-decoration: none; }
+
+
+
