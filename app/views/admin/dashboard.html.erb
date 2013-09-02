@@ -45,7 +45,7 @@
         <tr hidden class="toggler-data">
           <td colspan="6">
             <ul id="activities">
-              <% user.activities(session[:admin]).each do |activity| %>
+              <% user.activities(current_admin).each do |activity| %>
                 <li>
                   <span class="tag date">
                     <i class="icon-calendar"></i> <%= activity.date.strftime("%d-%m-%y %H:%M:%S") %>
