@@ -1,10 +1,18 @@
   <script>
-    function click_to_toggle (el) { $(el).find('span.toggler').toggleClass('click-to-close'); $(el).next().toggle(); }
+    function click_to_toggle (el) {
+      $(el).find('.toggler').toggleClass('icon-plus').toggleClass('icon-minus');
+      $(el).next().toggle();
+    }
   </script>
   <section id="dashboard">
     <header>
       <h4>
-        ADMIN DASHBOARD &raquo; <%= Customer.find(params[:id]).api_name %>
+        <% if session[:admin].customer.super? %>
+          <%= link_to 'ADMIN DASHBOARD', admin_customers_dashboard_url %>
+        <% else %>
+          ADMIN DASHBOARD
+        <% end %>
+        &nbsp;&raquo;&nbsp;<%= Customer.find(params[:id]).api_name %>
         <a href="/admin/logout">&nbsp;<small>[ Logout ]</small></a>
       </h4>
       <%= image_tag "logo.png", :style => "height: 70px; width: 70px; position: absolute; top: 0; right: 0;"%>
@@ -12,8 +20,12 @@
     <div style="min-width: 960px; min-height: 600px; background:white">
       <nav>
         <ul>
+          <% if session[:admin].customer.super? %>
+          <li>
+            <%= link_to 'Elenco Customer', admin_customers_dashboard_url %>
+          </li>
+          <% end %>
           <li class="active"><a href="#">Elenco Utenti</a></li>
-          <li><a href="#">Statistics</a></li>
         </ul>
       </nav>
       <table>
@@ -39,7 +51,7 @@
             <%= user.email %>
           </td>
           <td>
-            <span class="toggler">&raquo;</span>
+            <i class="toggler icon-plus"></i>
           </td>
         </tr>
         <tr hidden class="toggler-data">
