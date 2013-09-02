@@ -1,9 +1,3 @@
-  <script>
-    function click_to_toggle (el) {
-      $(el).find('span.toggler').toggleClass('click-to-close');
-      $(el).next().toggle();
-    }
-  </script>
   <section id="dashboard">
     <header>
       <h4 style="padding-left:0">ADMIN DASHBOARD <small>[ <a href="/admin/logout">Logout</a> ]</small></h4>
@@ -11,28 +5,19 @@
     </header>
     <div style="min-width: 960px; min-height: 600px; background:white">
       <nav>
-        <ul>
-          <li class="active"><a href="#">Elenco Clienti</a></li>
-          <li><a href="#">Statistics</a></li>
-        </ul>
+        <ul><li class="active"><a href="#">Elenco Customer</a></li></ul>
       </nav>
       <table>
         <tr>
-          <th>Profile</th>
           <th>Customer</th>
-          <th class="align-left">Api Key</th>
+          <th>Api Key</th>
+          <th class="align-center">Profile</th>
         </tr>
         <% @customers.each do |customer| %>
-        <tr onclick="click_to_toggle(this)" class="toggler-click">
-          <td>
-            <%= link_to "LINK", admin_dashboard_url(customer) %>
-          </td>
-          <td>
-            <%= customer.api_name %>
-          </td>
-          <td class="align-left">
-            <%= customer.api_value %>
-          </td>
+        <tr onclick="window.location.href=<%="'#{admin_dashboard_url(customer)}'"%>" class="hover-pointer">
+          <td class="uppercase"><%= customer.api_name %></td>
+          <td><%= customer.api_value %></td>
+          <td class="align-center"><i class="icon-external-link"></i></td>
         </tr>
       <% end %>
       </table>

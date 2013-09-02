@@ -75,9 +75,7 @@
 
   th { font-weight: bold; }
 
-  tr span.toggler { font-size: 18px; display: block; color: #555; -webkit-transform:rotate(90deg); transform:rotate(90deg); }
-
-  tr span.toggler.click-to-close { -webkit-transform:rotate(270deg); transform:rotate(270deg); }
+  tr .toggler { color: #555; }
 
   .toggler-click { cursor:pointer; }
 
@@ -120,5 +118,10 @@
 
   h4 a:hover { color: #fff; text-decoration: none; }
 
+  .hover-pointer { cursor: pointer; }
+
+  .uppercase { text-transform: uppercase; }
+
+  .align-center { text-align: center; }
 
 
