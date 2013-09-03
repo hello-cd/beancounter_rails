@@ -26,10 +26,10 @@ class AdminController < ActionController::Base
     admin = Admin.find_by_username(params[:username])
     if admin.nil? || !admin.authenticate(params[:password])
       redirect_to admin_login_url, :notice => 'Username or password do not match!'
+    else
+      session[:admin_id] = admin.id
+      redirect_to admin_dashboard
     end
-
-    session[:admin_id] = admin.id
-    redirect_to admin_dashboard
   end
 
   def customers_dashboard

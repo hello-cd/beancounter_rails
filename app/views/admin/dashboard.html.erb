@@ -7,7 +7,7 @@
   <section id="dashboard">
     <header>
       <h4>
-        <% if session[:admin].customer.super? %>
+        <% if current_admin.super? %>
           <%= link_to 'ADMIN DASHBOARD', admin_customers_dashboard_url %>
         <% else %>
           ADMIN DASHBOARD
@@ -20,7 +20,7 @@
     <div style="min-width: 960px; min-height: 600px; background:white">
       <nav>
         <ul>
-          <% if session[:admin].customer.super? %>
+          <% if current_admin.super? %>
           <li>
             <%= link_to 'Elenco Customer', admin_customers_dashboard_url %>
           </li>
