@@ -17,8 +17,8 @@ class AdminController < ActionController::Base
   end
 
   def dashboard
-    customer = Customer.find(params[:id])
-    @users = customer.users
+    @customer = Customer.find(params[:id])
+    @users = @customer.users
     redirect_to admin_error_url unless logged?
   end
 
@@ -33,7 +33,7 @@ class AdminController < ActionController::Base
   end
 
   def customers_dashboard
-    @customers = Customer.find_all_by_super(false)
+    @customers = Customer.all
   end
 
   helper_method :current_admin

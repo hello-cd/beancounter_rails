@@ -7,13 +7,15 @@ class User
   require "module/beancounter_rest_client"
   include BeancounterRestClient
 
-  attr_accessor :username,:token, :name, :provider, :picture, :full_name, :email
-  attr_accessible :username,:token, :name, :provider, :picture, :full_name, :email
+  attr_accessor :username,:token, :name, :provider, :picture, :full_name, :email, :interests, :categories
+  attr_accessible :username,:token, :name, :provider, :picture, :full_name, :email, :interests, :categories
 
   def initialize(attributes = {})
     attributes.each do |name, value|
       send("#{name}=", value)
     end
+    self.interests = []
+    self.categories = []
   end
 
   def fields_from_json(json_user)
@@ -36,7 +38,11 @@ class User
   end
 
   def get_profile
-    get "#{base_url}user/#{username}/profile?token=#{token}", &get_profile_block
+    get "#{base_url}user/#{username}/profile/me?token=#{token}", &get_profile_block
+  end
+
+  def load_profile(apikey)
+    get "#{base_url}user/#{username}/profile?apikey=#{apikey}", &profile_block
   end
 
   def get_user_data
@@ -105,6 +111,20 @@ class User
     Proc.new do |json, result|
       if result.code == "200" && json["status"] == "OK"
         [ json['object']['interests'], json['object']['categories'] ]
+      end
+    end
+  end
+
+  def profile_block
+    Proc.new do |json, result|
+      if result.code == "200" && json["status"] == "OK"
+        json['object']['interests'].each do |json_interest|
+          self.interests << Interest.new(json_interest)
+        end
+
+        json['object']['categories'].each do |json_category|
+          self.categories << Category.new(json_category)
+        end
       end
     end
   end
