@@ -1,7 +1,99 @@
   <script>
-    function click_to_toggle (el) {
-      $(el).find('.toggler').toggleClass('icon-plus').toggleClass('icon-minus');
-      $(el).next().toggle();
+
+    function str_pad (input, pad_length, pad_string, pad_type) { // http://phpjs.org/functions/str_pad/
+
+      var half = '',
+        pad_to_go;
+
+      var str_pad_repeater = function (s, len) {
+        var collect = '',
+          i;
+
+        while (collect.length < len) {
+          collect += s;
+        }
+        collect = collect.substr(0, len);
+
+        return collect;
+      };
+
+      input += '';
+      pad_string = pad_string !== undefined ? pad_string : ' ';
+
+      if (pad_type !== 'STR_PAD_LEFT' && pad_type !== 'STR_PAD_RIGHT' && pad_type !== 'STR_PAD_BOTH') {
+        pad_type = 'STR_PAD_RIGHT';
+      }
+      if ((pad_to_go = pad_length - input.length) > 0) {
+        if (pad_type === 'STR_PAD_LEFT') {
+          input = str_pad_repeater(pad_string, pad_to_go) + input;
+        } else if (pad_type === 'STR_PAD_RIGHT') {
+          input = input + str_pad_repeater(pad_string, pad_to_go);
+        } else if (pad_type === 'STR_PAD_BOTH') {
+          half = str_pad_repeater(pad_string, Math.ceil(pad_to_go / 2));
+          input = half + input + half;
+          input = input.substr(0, pad_length);
+        }
+      }
+
+      return input;
+    }
+
+    function click_to_toggle (element) {
+      var parent = $(element).parents('tr'), tabs = parent.nextUntil('tr.user'), visible_tab = tabs.filter(':visible');
+      $(parent).find(".subtab-button").removeClass("active");
+      tabs.hide();
+      if(!visible_tab.hasClass($(element).attr('data-toggle'))) {
+        $(element).addClass("active");
+        $(tabs).filter('.' + $(element).attr('data-toggle')).show();
+      }
+    }
+
+    function click_to_show_activities (event, element) {
+      event.preventDefault(); // prevent default on-click action
+
+      var knob = $(element).parents('span'),
+          template = '<li> \
+            <span class="tag date" style="margin-right: 10px">{date}</span> \
+            <span class="tag name" data-provider="{verb-provider}"><i class="{verb-class}"></i>{verb}</span> \
+            <span class="tag">{name}{url}</span> \
+          </li>';
+
+      knob.toggleClass('subtab-knob-open');
+
+      knob.next('div.subtab').toggle();
+
+      if ( !knob.hasClass('subtab-knob-open') ) { knob.next('div.subtab').html('<center>Loading...</center>'); return false; }
+
+      $.ajax({ type: "GET", url: "/admin/activities?" + $(element).attr("data-activities-id"), dataType: 'json' }).done(function( json ) {
+        var _html = '';
+        $(json).each(function(i, activity){
+          var urls = '', date = new Date(activity.timestamp);
+
+          $(activity.url).each(function(i, url){
+            urls += ' &raquo; <a href="http://'+ url.replace(/^https?\:\/\//, '') +'">'+ url.replace(/^https?\:\/\//, '').replace(/^www\./, '').replace(/\/+$/,'') +'</a>'
+          });
+
+          var verb_class = (activity.verb == "FAVOURITE") ? "icon-star" : ((activity.verb == "TWEET") ? "icon-twitter-sign" : "icon-facebook-sign")
+          var verb_provider = (activity.verb == "FAVOURITE") ? "bc" : ((activity.verb == "TWEET") ? "tw" : "fb")
+          var tpl = template
+            .replace('{verb-provider}', verb_provider)
+            .replace('{verb-class}', verb_class)
+            .replace('{verb}', activity.verb)
+            .replace('{name}', activity.name)
+            .replace('{url}', urls )
+            .replace('{date}',
+              str_pad( date.getDate(), 2, '0', 'STR_PAD_LEFT') + '-' +
+              str_pad( date.getMonth() + 1, 2, '0', 'STR_PAD_LEFT') +'-'+
+              str_pad( date.getFullYear(), 2, '0', 'STR_PAD_LEFT') + ' '+
+              str_pad( date.getHours(), 2, '0', 'STR_PAD_LEFT') + ':' +
+              str_pad( date.getMinutes(), 2, '0', 'STR_PAD_LEFT') +':'+
+              str_pad( date.getSeconds(), 2, '0', 'STR_PAD_LEFT')
+            );
+          _html += tpl;
+        });
+
+        knob.next('div.subtab').html('').append($('<ul>').html(_html));
+      });
     }
   </script>
   <section id="dashboard">
@@ -37,12 +129,15 @@
           <th>&nbsp;</th>
         </tr>
         <% @users.each do |user| %>
-        <tr onclick="click_to_toggle(this)" class="toggler-click">
+        <tr class="user">
           <td>
               <%= image_tag user.picture, :class => "user-picture" %>
           </td>
           <td class="align-left">
-            <span class="provider icon-<%= user.provider.downcase %>-sign"></span> <%= user.username %>
+            <% user.providers.each do |provider| %>
+              <span class="provider icon-<%= provider.downcase %>-sign"></span>
+            <% end %>
+            <%= user.username %>
           </td>
           <td>
             <%= user.full_name %>
@@ -50,28 +145,31 @@
           <td>
             <%= user.email %>
           </td>
-          <td>
-            <i class="toggler icon-plus"></i>
+          <td class="align-right">
+            <button class="subtab-button" onclick="click_to_toggle(this)" data-toggle="activities">
+              <i class="icon-th-list"></i> Activities
+            </button>
+            <button class="subtab-button" onclick="click_to_toggle(this)" data-toggle="categories">
+              <i class="icon-sitemap"></i> Categories
+            </button>
+            <button class="subtab-button" onclick="click_to_toggle(this)" data-toggle="interests">
+              <i class="icon-tasks"></i> Interests
+            </button>
           </td>
         </tr>
-        <tr hidden class="toggler-data">
+        <tr hidden class="toggler-data activities">
           <td colspan="6">
-            <ul id="activities">
+            <ul class="activity">
               <% user.activities(current_admin).each do |activity| %>
                 <li>
                   <span class="tag date">
                     <i class="icon-calendar"></i> <%= activity.date.strftime("%d-%m-%y %H:%M:%S") %>
                   </span>
 
-                  <% if activity.verb == "FAVOURITE" %>
-                  <span class="tag bean">
-                    <i class="icon-star"></i> <%= activity.verb %>
+                  <span class="tag" data-provider="<%= (activity.verb == "FAVOURITE") ? "bc" : ((activity.verb == "TWEET") ? "tw" : "fb")%>">
+                    <i class="<%= (activity.verb == "FAVOURITE") ? "icon-star" : ((activity.verb == "TWEET") ? "icon-twitter-sign" : "icon-facebook-sign")%>"></i>
+                    <%= activity.verb %>
                   </span>
-                  <% else %>
-                  <span class="tag" data-provider="<%= user.provider %>">
-                    <i class="icon-<%= user.provider.downcase %>-sign"></i> <%= activity.verb %>
-                  </span>
-                  <% end %>
 
                   <% if activity.name.present? ||  activity.url.present? %>
                   <span class="tag name">
@@ -89,8 +187,43 @@
                   <% end %>
                 </li>
               <% end %>
-              <%= user.interests %>
-              <%= user.categories %>
+            </ul>
+          </td>
+        </tr>
+        <tr class="interests" hidden>
+          <td colspan="6">
+            <ul class="interest">
+            <% user.interests.sort_by(&:weight_f).reverse.each do |interest| %>
+              <li>
+                <span class="tag bean">
+                  <%= interest.label %>
+                </span>
+                <span class="tag">
+                  <%= interest.weight_f %>
+                </span>
+                <span class="tag date">
+                  <a href="#" onclick="click_to_show_activities(event, this)" data-activities-id="<%=interest.activities_id.map!{|activity_id| "activities[]=#{activity_id}"}.join('&')%>">
+                    Show activities <span class="activity-count-indicator"><%= interest.activities_size %></span>
+                  </a>
+                </span>
+                <div class="subtab" hidden><center>Loading...</center></div>
+              </li>
+            <% end %>
+            </ul>
+          </td>
+        </tr>
+        <tr class="categories" hidden>
+          <td colspan="6">
+            <ul class="category">
+            <% user.categories.sort_by(&:weight_f).reverse.each do |category| %>
+              <li>
+                <span class="tag bean no-right">
+                  <%= category.label %>
+                </span><span class="tag no-left">
+                  <%= category.weight_f %>
+                </span>
+              </li>
+            <% end %>
             </ul>
           </td>
         </tr>

@@ -12,5 +12,6 @@ Beancounter::Application.routes.draw do
   match '/admin/error', to: 'admin#error'
   match '/admin/login', to: 'admin#login'
   match '/admin/logout', to: 'admin#logout'
+  match '/admin/activities', to: 'admin#activities'
   root :to => redirect('/sign_in')
 end

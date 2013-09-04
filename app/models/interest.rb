@@ -13,4 +13,8 @@ class Interest
     self.activities_size = json['activitiesSize']
     self.activities_id = json['activities']
   end
+
+  def weight_f
+    self.weight == "NaN" ? 0 : format('%.6f', self.weight)
+  end
 end

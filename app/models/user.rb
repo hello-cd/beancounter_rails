@@ -7,22 +7,24 @@ class User
   require "module/beancounter_rest_client"
   include BeancounterRestClient
 
-  attr_accessor :username,:token, :name, :provider, :picture, :full_name, :email, :interests, :categories
-  attr_accessible :username,:token, :name, :provider, :picture, :full_name, :email, :interests, :categories
+  attr_accessor :username,:token, :name, :providers, :picture, :full_name, :email, :interests, :categories
+  attr_accessible :username,:token, :name, :providers, :picture, :full_name, :email, :interests, :categories
 
   def initialize(attributes = {})
     attributes.each do |name, value|
       send("#{name}=", value)
     end
-    self.interests = []
+    self.interests  = []
     self.categories = []
+    self.providers  = []
   end
 
   def fields_from_json(json_user)
     metadata = json_user["metadata"]
     self.full_name = metadata["twitter.user.name"] || facebook_full_name(metadata)
     self.picture   = metadata["twitter.user.imageUrl"] || metadata["facebook.user.picture"]
-    self.provider  = json_user["services"].include?("facebook") ? "facebook" : "twitter"
+    self.providers << "facebook" if json_user["services"].include?("facebook")
+    self.providers << "twitter"  if json_user["services"].include?("twitter")
   end
 
   def persisted?

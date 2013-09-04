@@ -41,6 +41,14 @@ class AdminController < ActionController::Base
     @admin ||= Admin.find(session[:admin_id])
   end
 
+  def activities
+    activities = []
+    params[:activities].each do |activity_id|
+      activities << Activity.find_by_id(activity_id, current_admin.customer.api_value)
+    end
+    render json: activities
+  end
+
   private
 
     def admin_dashboard

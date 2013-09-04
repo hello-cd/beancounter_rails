@@ -11,5 +11,9 @@ class Category
     self.label  = json['label']
     self.weight = json['weight']
   end
+
+  def weight_f
+    self.weight == "NaN" ? 0 : format('%.6f', self.weight)
+  end
 end
 
