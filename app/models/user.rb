@@ -66,12 +66,8 @@ class User
   end
 
   def provider?(provider)
-    return true if self.provider == :both
-    if self.provider == provider
-      return true
-    else
-      return false
-    end
+    return false if self.providers.nil?
+    self.providers.include?(provider)
   end
 
   private
@@ -95,13 +91,13 @@ class User
           if self.name.empty?
             self.name = "#{user_information['metadata']['facebook.user.firstname']} #{user_information['metadata']['facebook.user.lastname']}"
           end
-          self.provider = :both
+          self.providers = ["facebook", "twitter"]
         elsif user_information['services'].keys == ["facebook"]
           self.name = "#{user_information['metadata']['facebook.user.firstname']} #{user_information['metadata']['facebook.user.lastname']}"
-          self.provider = :facebook
+          self.providers = ["facebook"]
         elsif user_information['services'].keys == ["twitter"]
           self.name = "#{user_information['metadata']['twitter.user.name']}"
-          self.provider = :twitter
+          self.providers = ["twitter"]
         end
       else
         false
