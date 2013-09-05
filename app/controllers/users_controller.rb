@@ -5,6 +5,10 @@ class UsersController < ApplicationController
 
   def show
     current_user = User.new(:username => params[:username], :token => params[:token])
+    #TODO Moving this in session controller?
+    current_user.get_user_data
+    session[:user] = current_user
+
     @interests, @categories = current_user.get_profile
     if @interests.nil? || @categories.nil?
       @interests = []
