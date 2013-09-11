@@ -10,13 +10,8 @@ class UsersController < ApplicationController
     session[:user] = current_user
 
     @interests, @categories = current_user.get_profile
-    if @interests.nil? || @categories.nil?
-      @interests = []
-      @categories = []
-    else
-      @interests.sort_by! { |hsh| hsh["weight"] }
-      @categories.sort_by! { |hsh| hsh["weight"] }
-    end
+    @interests.sort_by! { |hsh| hsh["weight"] }
+    @categories.sort_by! { |hsh| hsh["weight"] }
   end
 
   def facebook_publish

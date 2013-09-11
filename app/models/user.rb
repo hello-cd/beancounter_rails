@@ -52,7 +52,7 @@ class User
   end
 
   def json_activities(admin)
-    get "#{base_url}activities/search?path=activity.username&value=#{username}&apikey=#{admin.customer.api_value}", &json_activities_block
+    get "#{base_url}activities/search?path=user.username&value=#{username}&apikey=#{admin.customer.api_value}", &json_activities_block
   end
 
   def activities(admin)
@@ -109,6 +109,8 @@ class User
     Proc.new do |json, result|
       if result.code == "200" && json["status"] == "OK"
         [ json['object']['interests'], json['object']['categories'] ]
+      else
+        [ [], [] ]
       end
     end
   end
