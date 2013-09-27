@@ -59,7 +59,11 @@ class User
     activities = []
     json_activities(admin).each do |json|
       json_activity = json["activity"]
-      activity = Kernel.const_get("Activity").const_get(json_activity["verb"].titleize).new(json_activity)
+      begin
+        activity = Kernel.const_get("Activity").const_get(json_activity["verb"].titleize).new(json_activity)
+      rescue
+        activity = Kernel.const_get("Activity").const_get("Share").new(json_activity)
+      end
       activities << activity
     end
     activities
