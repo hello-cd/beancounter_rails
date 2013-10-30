@@ -8,7 +8,7 @@ class Customer < ActiveRecord::Base
 
   def users
     users = []
-    json_users.each do |json_user|
+    json_users.compact!.each do |json_user|
       user = User.new(:username => json_user["username"], :email => json_user["email"])
       user.fields_from_json(json_user)
       user.load_profile(api_value)
