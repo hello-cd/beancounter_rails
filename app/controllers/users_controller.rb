@@ -12,6 +12,10 @@ class UsersController < ApplicationController
     @interests, @categories = current_user.get_profile
     @interests.sort_by! { |hsh| hsh["weight"] }
     @categories.sort_by! { |hsh| hsh["weight"] }
+    @top_interests = @interests[0..4]
+    @top_categories = @categories[0..4]
+    @remaining_interests_weight = 1 - @interests.map{|int| int["weight"].to_i}.sum
+    @remaining_categories_weight = 1 - @categories.map{|int| int["weight"].to_i}.sum
   end
 
   def facebook_publish
