@@ -15,6 +15,6 @@ class Interest
   end
 
   def weight_f
-    self.weight == "NaN" ? 0 : format('%.6f', self.weight)
+    self.weight == "NaN" ? 0 : format('%.6f', self.weight).to_f
   end
 end
