@@ -1,5 +1,4 @@
   <script>
-
     function str_pad (input, pad_length, pad_string, pad_type) { // http://phpjs.org/functions/str_pad/
       var half = '', pad_to_go, str_pad_repeater = function (s, len) {
         var collect = '', i;
@@ -82,6 +81,7 @@
       });
     }
   </script>
+  <style> button { outline: none } </style>
   <section id="dashboard">
     <header>
       <h4>
@@ -117,7 +117,7 @@
         <% @users.each do |user| %>
         <tr class="user">
           <td>
-              <%= image_tag user.picture, :class => "user-picture" %>
+            <%= image_tag user.picture, :class => "user-picture", :onerror => "this.src='/user-placeholder.jpg'" %>
           </td>
           <td class="align-left">
             <% user.providers.each do |provider| %>
