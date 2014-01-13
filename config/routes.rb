@@ -13,5 +13,8 @@ Beancounter::Application.routes.draw do
   match '/admin/login', to: 'admin#login'
   match '/admin/logout', to: 'admin#logout'
   match '/admin/activities', to: 'admin#activities'
+  match '/admin/:id/async_categories', to: 'admin#async_categories'
+  match '/admin/:id/async_interests', to: 'admin#async_interests'
+  match '/admin/:id/async_activities', to: 'admin#async_activities'
   root :to => redirect('/sign_in')
 end

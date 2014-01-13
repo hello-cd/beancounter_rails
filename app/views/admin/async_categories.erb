@@ -1,0 +1,15 @@
+<% if @categories.length > 0 %>
+  <ul class="category">
+  <% @categories.sort_by(&:weight_f).reverse.each do |category| %>
+    <li>
+      <span class="tag bean no-right">
+        <%= category.label %>
+      </span><span class="tag no-left">
+        <%= category.weight_f %>
+      </span>
+    </li>
+  <% end %>
+  </ul>
+<% else %>
+  <span>No categories found.</span>
+<% end %>

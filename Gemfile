@@ -21,7 +21,7 @@ end
 
 group :test do
   gem 'rspec-rails'
-  gem 'debugger'
+  gem 'debugger', :group => :development
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'vcr'

@@ -1,0 +1,22 @@
+<% if @interests.length > 0 %>
+  <ul class="interest">
+  <% @interests.sort_by(&:weight_f).reverse.each do |interest| %>
+    <li>
+      <span class="tag bean">
+        <%= interest.label %>
+      </span>
+      <span class="tag">
+        <%= interest.weight_f %>
+      </span>
+      <span class="tag date">
+        <a href="#" onclick="click_to_show_activities(event, this)" data-activities-id="<%=interest.activities_id.map!{|activity_id| "activities[]=#{activity_id}"}.join('&')%>">
+          Show activities <span class="activity-count-indicator"><%= interest.activities_size %></span>
+        </a>
+      </span>
+      <div class="subtab" hidden><center>Loading...</center></div>
+    </li>
+  <% end %>
+  </ul>
+<% else %>
+  <span>No interests found.</span>
+<% end %>

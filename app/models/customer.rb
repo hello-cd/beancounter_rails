@@ -17,6 +17,17 @@ class Customer < ActiveRecord::Base
     users
   end
 
+  def get_user_by_username(username)
+    json_users.compact.each do |json_user|
+      if (username == json_user["username"])
+        user = User.new(:username => json_user["username"], :email => json_user["email"])
+        user.fields_from_json(json_user)
+        user.load_profile(api_value)
+        return user
+      end
+    end
+  end
+
   private
 
   def json_users

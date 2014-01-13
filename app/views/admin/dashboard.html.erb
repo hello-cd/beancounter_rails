@@ -1,28 +1,14 @@
   <script>
-
     function str_pad (input, pad_length, pad_string, pad_type) { // http://phpjs.org/functions/str_pad/
-
-      var half = '',
-        pad_to_go;
-
-      var str_pad_repeater = function (s, len) {
-        var collect = '',
-          i;
-
-        while (collect.length < len) {
-          collect += s;
-        }
+      var half = '', pad_to_go, str_pad_repeater = function (s, len) {
+        var collect = '', i;
+        while (collect.length < len) { collect += s; }
         collect = collect.substr(0, len);
-
         return collect;
       };
-
       input += '';
       pad_string = pad_string !== undefined ? pad_string : ' ';
-
-      if (pad_type !== 'STR_PAD_LEFT' && pad_type !== 'STR_PAD_RIGHT' && pad_type !== 'STR_PAD_BOTH') {
-        pad_type = 'STR_PAD_RIGHT';
-      }
+      if (pad_type !== 'STR_PAD_LEFT' && pad_type !== 'STR_PAD_RIGHT' && pad_type !== 'STR_PAD_BOTH') pad_type = 'STR_PAD_RIGHT';
       if ((pad_to_go = pad_length - input.length) > 0) {
         if (pad_type === 'STR_PAD_LEFT') {
           input = str_pad_repeater(pad_string, pad_to_go) + input;
@@ -34,18 +20,25 @@
           input = input.substr(0, pad_length);
         }
       }
-
       return input;
     }
 
     function click_to_toggle (element) {
-      var parent = $(element).parents('tr'), tabs = parent.nextUntil('tr.user'), visible_tab = tabs.filter(':visible');
-      $(parent).find(".subtab-button").removeClass("active");
-      tabs.hide();
-      if(!visible_tab.hasClass($(element).attr('data-toggle'))) {
-        $(element).addClass("active");
-        $(tabs).filter('.' + $(element).attr('data-toggle')).show();
+      var $element = $(element)
+        , $tabScreen = $element.parents('tr').next()
+        , $tabData = $tabScreen.children('td')
+      if ( $element.hasClass('active') ) {
+        $element.removeClass('active')
+        $tabData.html('<span>Loading...</span>')
+        $tabScreen.hide()
+        return
       }
+      $element.siblings('button').removeClass('active')
+      $element.addClass('active')
+      $tabScreen.show()
+      $.get('async_'+ $element.attr('data-toggle') + '?username=' + $element.attr('data-user'), function( data ) {
+        $tabData.html(data)
+      })
     }
 
     function click_to_show_activities (event, element) {
@@ -70,7 +63,7 @@
           var urls = '', date = new Date(activity.timestamp);
 
           $(activity.url).each(function(i, url){
-            urls += ' &raquo; <a href="http://'+ url.replace(/^https?\:\/\//, '') +'">'+ url.replace(/^https?\:\/\//, '').replace(/^www\./, '').replace(/\/+$/,'') +'</a>'
+            urls += ' &raquo; <a href="http://'+ url.replace(/^https?\:\/\//, '') +'" target="_blank">'+ url.replace(/^https?\:\/\//, '').replace(/^www\./, '').replace(/\/+$/,'') +'</a>'
           });
 
           var verb_class = (activity.verb == "FAVOURITE") ? "icon-star" : ((activity.verb == "TWEET") ? "icon-twitter-sign" : "icon-facebook-sign")
@@ -96,6 +89,7 @@
       });
     }
   </script>
+  <style> button { outline: none } </style>
   <section id="dashboard">
     <header>
       <h4>
@@ -131,7 +125,7 @@
         <% @users.each do |user| %>
         <tr class="user">
           <td>
-              <%= image_tag user.picture, :class => "user-picture" %>
+            <%= image_tag user.picture, :class => "user-picture", :onerror => "this.src='/user-placeholder.jpg'" %>
           </td>
           <td class="align-left">
             <% user.providers.each do |provider| %>
@@ -146,85 +140,20 @@
             <%= user.email %>
           </td>
           <td class="align-right">
-            <button class="subtab-button" onclick="click_to_toggle(this)" data-toggle="activities">
+            <button class="subtab-button" onclick="click_to_toggle(this)" data-toggle="activities" data-user="<%= user.username %>">
               <i class="icon-th-list"></i> Activities
             </button>
-            <button class="subtab-button" onclick="click_to_toggle(this)" data-toggle="categories">
+            <button class="subtab-button" onclick="click_to_toggle(this)" data-toggle="categories" data-user="<%= user.username %>">
               <i class="icon-sitemap"></i> Categories
             </button>
-            <button class="subtab-button" onclick="click_to_toggle(this)" data-toggle="interests">
+            <button class="subtab-button" onclick="click_to_toggle(this)" data-toggle="interests" data-user="<%= user.username %>">
               <i class="icon-tasks"></i> Interests
             </button>
           </td>
         </tr>
-        <tr hidden class="toggler-data activities">
+        <tr hidden class="toggler-screen">
           <td colspan="6">
-            <ul class="activity">
-              <% user.activities(current_admin).each do |activity| %>
-                <li>
-                  <span class="tag date">
-                    <i class="icon-calendar"></i> <%= activity.date.strftime("%d-%m-%y %H:%M:%S") %>
-                  </span>
-
-                  <span class="tag" data-provider="<%= (activity.verb == "FAVOURITE") ? "bc" : ((activity.verb == "TWEET") ? "tw" : "fb")%>">
-                    <i class="<%= (activity.verb == "FAVOURITE") ? "icon-star" : ((activity.verb == "TWEET") ? "icon-twitter-sign" : "icon-facebook-sign")%>"></i>
-                    <%= activity.verb %>
-                  </span>
-
-                  <% if activity.name.present? ||  activity.url.present? %>
-                  <span class="tag name">
-                    <% if activity.name.present? %>
-                      <i class="icon-comment-alt"></i> <%= activity.name %>
-                    <% end %>
-                    <% activity.url.each do |url| %>
-                      &raquo; <%= link_to url.sub(/^https?\:\/\//, '').sub(/^www\./, '').sub(/\/+$/, ''), 'http://' + url.sub(/^https?\:\/\//, '') %>
-                    <% end %>
-                  </span>
-                  <% end %>
-
-                  <% activity.categories.each do |category| %>
-                  <span class="tag category"><i class="icon-tags"></i> <%= category %></span>
-                  <% end %>
-                </li>
-              <% end %>
-            </ul>
-          </td>
-        </tr>
-        <tr class="interests" hidden>
-          <td colspan="6">
-            <ul class="interest">
-            <% user.interests.sort_by(&:weight_f).reverse.each do |interest| %>
-              <li>
-                <span class="tag bean">
-                  <%= interest.label %>
-                </span>
-                <span class="tag">
-                  <%= interest.weight_f %>
-                </span>
-                <span class="tag date">
-                  <a href="#" onclick="click_to_show_activities(event, this)" data-activities-id="<%=interest.activities_id.map!{|activity_id| "activities[]=#{activity_id}"}.join('&')%>">
-                    Show activities <span class="activity-count-indicator"><%= interest.activities_size %></span>
-                  </a>
-                </span>
-                <div class="subtab" hidden><center>Loading...</center></div>
-              </li>
-            <% end %>
-            </ul>
-          </td>
-        </tr>
-        <tr class="categories" hidden>
-          <td colspan="6">
-            <ul class="category">
-            <% user.categories.sort_by(&:weight_f).reverse.each do |category| %>
-              <li>
-                <span class="tag bean no-right">
-                  <%= category.label %>
-                </span><span class="tag no-left">
-                  <%= category.weight_f %>
-                </span>
-              </li>
-            <% end %>
-            </ul>
+            <span>Loading...</span>
           </td>
         </tr>
         <% end %>
