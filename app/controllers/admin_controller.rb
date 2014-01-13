@@ -22,6 +22,21 @@ class AdminController < ActionController::Base
     redirect_to admin_error_url unless logged?
   end
 
+  def async_activities
+    @activities = Customer.find(params[:id]).get_user_by_username(params[:username]).activities(current_admin)
+    render :layout => false
+  end
+
+  def async_categories
+    @categories = Customer.find(params[:id]).get_user_by_username(params[:username]).categories
+    render :layout => false
+  end
+
+  def async_interests
+    @interests = Customer.find(params[:id]).get_user_by_username(params[:username]).interests
+    render :layout => false
+  end
+
   def auth
     admin = Admin.find_by_username(params[:username])
     if admin.nil? || !admin.authenticate(params[:password])

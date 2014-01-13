@@ -1,0 +1,33 @@
+<% if @activities.length > 0 %>
+  <ul class="activity">
+    <% @activities.each do |activity| %>
+      <li>
+        <span class="tag date">
+          <i class="icon-calendar"></i> <%= activity.date.strftime("%d-%m-%y %H:%M:%S") %>
+        </span>
+
+        <span class="tag" data-provider="<%= (activity.verb == "FAVOURITE") ? "bc" : ((activity.verb == "TWEET") ? "tw" : "fb")%>">
+          <i class="<%= (activity.verb == "FAVOURITE") ? "icon-star" : ((activity.verb == "TWEET") ? "icon-twitter-sign" : "icon-facebook-sign")%>"></i>
+          <%= activity.verb %>
+        </span>
+
+        <% if activity.name.present? ||  activity.url.present? %>
+        <span class="tag name">
+          <% if activity.name.present? %>
+            <i class="icon-comment-alt"></i> <%= activity.name %>
+          <% end %>
+          <% activity.url.each do |url| %>
+            &raquo; <%= link_to url.sub(/^https?\:\/\//, '').sub(/^www\./, '').sub(/\/+$/, ''), 'http://' + url.sub(/^https?\:\/\//, ''), target: "_blank" %>
+          <% end %>
+        </span>
+        <% end %>
+
+        <% activity.categories.each do |category| %>
+        <span class="tag category"><i class="icon-tags"></i> <%= category %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <span>No activities found.</span>
+<% end %>
