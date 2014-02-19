@@ -114,7 +114,7 @@
           <li class="active"><a href="#">Elenco Utenti</a></li>
         </ul>
       </nav>
-     <%= will_paginate @users %>
+      <%= will_paginate @users %> - Total : <%=@users.total_entries%>
       <table>
         <tr>
           <th>Picture</th>
@@ -159,5 +159,6 @@
         </tr>
         <% end %>
       </table>
+      <%= will_paginate @users %>
     </div>
   </section>
