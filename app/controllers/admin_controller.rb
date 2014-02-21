@@ -18,7 +18,8 @@ class AdminController < ActionController::Base
 
   def dashboard
     @customer = Customer.find(params[:id])
-    @users = @customer.users
+    #@users = @customer.users
+    @users = @customer.users.paginate(:page => params[:page], :per_page => 15)
     redirect_to admin_error_url unless logged?
   end
 

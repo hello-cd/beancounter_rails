@@ -8,6 +8,7 @@ gem 'rails', '3.2.6'
 gem 'rest-client', :git => 'git://github.com/rest-client/rest-client.git'
 gem 'sqlite3'
 gem 'jquery-rails'
+gem 'will_paginate'
 
 # Gems used only for assets and not required
 # in production environments by default.
